@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Exploratory Well Target Governance Dashboard
+</title>
+
+<link rel="stylesheet"
+href="{% static 'css/login.css' %}">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="left-panel">
+
+        <div class="top-banner">
+
+            <div class="logo">
+                Well Target Governance Platform
+            </div>
+
+        </div>
+
+        <div class="seismic-bg"></div>
+
+        <div class="left-content">
+
+
+            <p>
+
+                Govern, validate and approve
+                exploratory well targets with
+                confidence and integrity.
+
+            </p>
+
+        </div>
+
+        <div class="footer">
+
+            © 2026 Acadamic Prototype
+
+        </div>
+
+    </div>
+
+    <div class="right-panel">
+
+        <div class="login-card">
+
+            <div class="card-logo">
+
+                <h1>
+                    Well Target
+                </h1>
+
+                <h3>
+                    Governance Platform
+                </h3>
+
+            </div>
+                
+            <div class="welcome">
+
+                <h2>
+                    Welcome
+                </h2>
+
+                <p>
+                    Please sign in to continue
+                </p>
+
+            </div>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <input
+type="text"
+name="username"
+placeholder="Enter Username"
+required>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+                <button
+                type="submit"
+                class="login-btn">
+
+                    SIGN IN
+
+                </button>
+
+                <p class="secure">
+
+                🔒 Secure Connection
+
+                 </p>
+
+            </form>
+            
+            <div class="landmark-footer">
+
+                Internship Prototype | Built with Django
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

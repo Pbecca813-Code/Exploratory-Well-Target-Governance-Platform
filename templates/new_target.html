@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<a href="{% url 'home' %}"
+   class="btn btn-secondary mb-3">
+
+    ← Back to Dashboard
+
+</a>
+
+<h2 class="mb-4">
+
+Create Exploratory Well Target
+
+</h2>
+
+<div class="card p-4 shadow-sm">
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button
+        type="submit"
+        class="btn btn-danger">
+
+            Save Well Target
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

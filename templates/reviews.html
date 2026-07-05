@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="fw-bold mb-1">
+
+🔍 Review Management
+
+</h2>
+
+<p class="text-muted mb-4">
+
+Manage geological interpretation reviews and monitor review progress.
+
+</p>
+
+<div class="row mb-4">
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+
+                    Pending Reviews
+
+                </h6>
+
+                <h2 class="text-warning">
+
+                    5
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+
+                    Completed
+
+                </h6>
+
+                <h2 class="text-success">
+
+                    12
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+
+                    Average Time
+
+                </h6>
+
+                <h2>
+
+                    2.3 d
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+
+                    Review Score
+
+                </h6>
+
+                <h2 class="text-primary">
+
+                    96%
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm">
+
+<div class="card-body">
+
+<div class="d-flex justify-content-between mb-3">
+
+<input
+
+class="form-control"
+
+placeholder="Search reviews..."
+
+style="width:300px;">
+
+<button class="btn btn-primary">
+
+<i class="bi bi-plus-circle"></i>
+
+New Review
+
+</button>
+
+</div>
+
+<table class="table table-hover align-middle">
+
+<thead>
+
+<tr>
+
+<th>Well Target</th>
+
+<th>Reviewer</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Alpha-01</td>
+
+<td>Patricia</td>
+
+<td>
+
+<span class="badge bg-warning">
+
+Pending
+
+</span>
+
+</td>
+
+<td>09 Jul 2026</td>
+
+<td>
+
+<button class="btn btn-sm btn-outline-primary">
+
+<i class="bi bi-eye"></i>
+
+</button>
+
+<button class="btn btn-sm btn-outline-success">
+
+<i class="bi bi-check2"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Beta-02</td>
+
+<td>Carlos</td>
+
+<td>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</td>
+
+<td>08 Jul 2026</td>
+
+<td>
+
+<button class="btn btn-sm btn-outline-primary">
+
+<i class="bi bi-eye"></i>
+
+</button>
+
+<button class="btn btn-sm btn-outline-secondary">
+
+<i class="bi bi-file-earmark-pdf"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}
