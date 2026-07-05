@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "ProjectStage",
+			"path": "."
+		}
+	],
+	"settings": {
+		"python-envs.pythonProjects": [
+			{
+				"path": "governance",
+				"envManager": "ms-python.python:venv",
+				"packageManager": "ms-python.python:pip"
+			}
+		]
+	}
+}
