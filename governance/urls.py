@@ -9,6 +9,8 @@ urlpatterns = [
         name='home'
     ),
 
+    path("register/", views.register, name="register"),
+
     path(
     'well-targets/',
     views.well_targets,
