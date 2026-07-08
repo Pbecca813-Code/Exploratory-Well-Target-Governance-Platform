@@ -1,16 +1,23 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>
-Exploratory Well Target Governance Dashboard
-</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet"
-href="{% static 'css/login.css' %}">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Exploratory WellTarget Governance Platform
+
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/login.css' %}">
 
 </head>
 
@@ -18,125 +25,85 @@ href="{% static 'css/login.css' %}">
 
 <div class="login-container">
 
-    <div class="left-panel">
+    <!-- LEFT SIDE -->
 
-        <div class="top-banner">
+    <section class="left-side">
 
-            <div class="logo">
-                Well Target Governance Platform
-            </div>
+        <div class="banner">
+
+            Exploratory WellTarget Governance Platform
 
         </div>
 
-        <div class="seismic-bg"></div>
+        <div class="overlay">
 
-        <div class="left-content">
+            <h1>
 
+                Welcome
+
+            </h1>
+
+            <h2>
+
+                Workspace Gateway
+
+            </h2>
 
             <p>
 
                 Govern, validate and approve
-                exploratory well targets with
-                confidence and integrity.
+                exploratory well targets through
+                a secure workflow.
 
             </p>
 
         </div>
 
-        <div class="footer">
+    </section>
 
-            © 2026 Acadamic Prototype
+    <!-- RIGHT SIDE -->
+
+    <section class="right-side">
+
+        <div class="login-panel">
+
+            <h1>
+
+                Choose Workspace
+
+            </h1>
+
+            <p>
+
+                Continue to your secure environment.
+
+            </p>
+
+            <div class="workspace-card user-card"
+     data-url="{% url 'user_login' %}">
+
+    <h2>User Workspace</h2>
+
+    <span>Operational Environment</span>
+
+</div>
+
+            <div class="workspace-card admin-card"
+     data-url="{% url 'admin_login' %}">
+
+    <h2>Administrator Workspace</h2>
+
+    <span>Restricted Environment</span>
+
+</div>
 
         </div>
 
-    </div>
-
-    <div class="right-panel">
-
-        <div class="login-card">
-
-            <div class="card-logo">
-
-                <h1>
-                    Well Target
-                </h1>
-
-                <h3>
-                    Governance Platform
-                </h3>
-
-            </div>
-                
-            <div class="welcome">
-
-                <h2>
-                    Welcome
-                </h2>
-
-                <p>
-                    Please sign in to continue
-                </p>
-
-            </div>
-
-            <form method="post">
-
-                {% csrf_token %}
-
-                <input
-type="text"
-name="username"
-placeholder="Enter Username"
-required>
-
-<input
-type="password"
-name="password"
-placeholder="Enter Password"
-required>
-
-                <button
-                type="submit"
-                class="login-btn">
-
-                    LOGIN
-
-                </button>
-<hr>
-
-<div class="text-center mt-3">
-
-    <p>
-
-        Don't have an account?
-
-    </p>
-
-    <a href="{% url 'register' %}" class="btn btn-success w-100">
-
-        Register New User
-
-    </a>
+    </section>
 
 </div>
-                <p class="secure">
 
-                🔒 Secure Connection
+<script src="{% static 'js/login.js' %}"></script>
 
-                 </p>
-
-            </form>
-            
-            <div class="landmark-footer">
-
-                Internship Prototype | Built with Django
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
 </body>
 </html>

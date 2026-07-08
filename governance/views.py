@@ -1,3 +1,7 @@
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
@@ -19,7 +23,8 @@ from .models import (
 
 from .forms import (
     WellTargetForm,
-    WellTargetDocumentForm
+    WellTargetDocumentForm,
+    EmployeeCreateForm,
 )
 
 
@@ -261,6 +266,10 @@ def delete_document(request, document_id):
 
 def register(request):
 
+    # Disable public registration in production
+    if not settings.ALLOW_SELF_REGISTRATION:
+        return redirect("login")
+
     if request.user.is_authenticated:
         return redirect("home")
 
@@ -292,4 +301,112 @@ def register(request):
         {
             "form": form
         }
+    )
+
+@login_required
+def user_management(request):
+
+    users = User.objects.all().order_by("first_name")
+
+    context = {
+        "users": users,
+    }
+
+    return render(
+        request,
+        "user_management.html",
+        context,
+    )
+
+@login_required
+def create_employee(request):
+
+    if request.method == "POST":
+
+        form = EmployeeCreateForm(request.POST)
+
+        if form.is_valid():
+
+            user = User.objects.create_user(
+
+                username=form.cleaned_data["username"],
+                first_name=form.cleaned_data["first_name"],
+                last_name=form.cleaned_data["last_name"],
+                email=form.cleaned_data["email"],
+                password=form.cleaned_data["password"],
+
+            )
+
+            return redirect("user_management")
+
+    else:
+
+        form = EmployeeCreateForm()
+
+    return render(
+        request,
+        "create_employee.html",
+        {
+            "form": form
+        }
+    )
+
+def user_login(request):
+
+    if request.method == "POST":
+
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+
+            login(request, user)
+
+            return redirect("home")
+
+        else:
+
+            messages.error(
+                request,
+                "Invalid username or password."
+            )
+
+    return render(
+        request,
+        "registration/user_login.html"
+    )
+    
+def admin_login(request):
+
+    if request.method == "POST":
+
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None and user.is_staff:
+
+            login(request, user)
+
+            return redirect("home")
+
+        messages.error(
+            request,
+            "Administrator credentials required."
+        )
+
+    return render(
+        request,
+        "registration/admin_login.html"
     )

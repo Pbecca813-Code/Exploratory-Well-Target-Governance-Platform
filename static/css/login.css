@@ -1,3 +1,7 @@
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
     margin:0;
     padding:0;
@@ -5,227 +9,477 @@
 }
 
 body{
+
     font-family:Segoe UI,sans-serif;
-    background:#050b16;
-    overflow:hidden;
+
+    background:#07101c;
+
 }
+
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
 
 .login-container{
+
     display:flex;
+
     height:100vh;
+
 }
 
-.left-panel{
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
+.left-side{
+
     width:55%;
+
     position:relative;
+
+    background:url("../images/seismic.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
 }
 
-.top-banner{
+.left-side::before{
+
+    content:"";
+
     position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+}
+
+.banner{
+
+    position:absolute;
+
     top:0;
+
     left:0;
 
     width:100%;
-    height:90px;
+
+    height:80px;
 
     background:#d52b1e;
 
+    color:white;
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    display:flex;
+
+    align-items:center;
+
+    padding-left:35px;
+
     z-index:10;
 
-    display:flex;
-    align-items:center;
-
-    padding-left:40px;
 }
 
-.logo{
-    color:white;
-    font-size:30px;
-    font-weight:bold;
-}
+.overlay{
 
-.seismic-bg{
-    height:100%;
-    width:100%;
-
-    background:
-    linear-gradient(
-    rgba(0,0,0,.35),
-    rgba(0,0,0,.55)),
-    url("../images/seismic.jpg");
-
-    background-size:cover;
-    background-position:center;
-}
-
-.left-content{
     position:absolute;
-    top:250px;     /* was 180px */
+
+    top:170px;
+
     left:60px;
+
+    z-index:5;
+
     color:white;
-    z-index:20;
+
 }
 
-.left-content h1{
-    font-size:48px;
-    font-weight:300;
-}
+.overlay h1{
 
-.left-content h2{
     font-size:56px;
+
+    font-weight:300;
+
+}
+
+.overlay h2{
+
+    font-size:70px;
+
     color:#d52b1e;
-    font-weight:600;
+
+    margin-bottom:20px;
+
 }
 
-.left-content p{
-    font-size:22px;
-    max-width:500px;
-    line-height:1.6;
-}
-
-.right-panel{
-    width:45%;
-
-    background:#050b16;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.login-card{
+.overlay p{
 
     width:520px;
 
-    background:rgba(15,23,42,.85);
+    font-size:24px;
 
-    border:1px solid rgba(255,255,255,.15);
+    line-height:1.6;
 
-    border-radius:24px;
+}
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.right-side{
+
+    width:45%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#07101c;
+
+}
+
+/* =====================================================
+   LOGIN PANEL
+===================================================== */
+
+.login-panel{
+
+    width:500px;
 
     padding:50px;
 
+    border-radius:25px;
+
+    background:#10192b;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+}
+
+.login-panel h1{
+
     color:white;
 
-    backdrop-filter:blur(20px);
-
-    box-shadow:
-    0 10px 40px rgba(0,0,0,.5);
-
-}
-
-.card-logo{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.card-logo h1{
-    color:#ff2d2d;
-    font-size:52px;
-}
-
-.card-logo h3{
-    letter-spacing:8px;
-    font-weight:300;
-}
-
-.welcome{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.welcome h2{
     font-size:42px;
+
+    margin-bottom:10px;
+
 }
 
-.welcome p{
-    color:#b5b5b5;
+.login-panel p{
+
+    color:#bfc8d8;
+
+    margin-bottom:40px;
+
+    font-size:18px;
+
 }
 
-.login-card label{
-    display:block;
-    margin-bottom:8px;
+/* =====================================================
+   WORKSPACE CARDS
+===================================================== */
+
+.workspace-card{
+
+    padding:35px;
+
+    border-radius:22px;
+
+    margin-bottom:30px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    color:white;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+
 }
 
-.login-card input{
+.workspace-card:hover{
+
+    transform:translateY(-8px) scale(1.02);
+
+}
+
+.workspace-card h2{
+
+    font-size:28px;
+
+    margin-bottom:10px;
+
+}
+
+.workspace-card span{
+
+    font-size:18px;
+
+    opacity:.95;
+
+}
+
+/* USER */
+
+.user-card{
+
+    background:linear-gradient(
+
+        135deg,
+
+        #e53935,
+
+        #b11813
+
+    );
+
+}
+
+/* ADMIN */
+
+.admin-card{
+
+    background:linear-gradient(
+
+        135deg,
+
+        #2f66b5,
+
+        #173760
+
+    );
+
+}
+
+/* =====================================================
+   LOGIN PAGE
+===================================================== */
+
+.login-page{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:100vh;
+
+    background:#07101c;
+
+}
+
+.login-box{
+
+    width:420px;
+
+    padding:50px;
+
+    border-radius:20px;
+
+    background:#10192b;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+
+}
+
+.login-box h1{
+
+    color:white;
+
+    font-size:38px;
+
+    margin-bottom:10px;
+
+}
+
+.login-box p{
+
+    color:#bfc8d8;
+
+    margin-bottom:35px;
+
+}
+
+.login-box input{
 
     width:100%;
 
     padding:16px;
 
-    background:#0f172a;
+    margin-bottom:18px;
 
-    border:1px solid #334155;
+    border:none;
+
+    border-radius:12px;
+
+    background:#1c2740;
 
     color:white;
+
+    font-size:17px;
+
+}
+
+.login-box input:focus{
+
+    outline:none;
+
+    border:2px solid #d52b1e;
+
+}
+
+.login-box button{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background:linear-gradient(135deg,#e53935,#b11813);
+
+    transition:.3s;
+
+}
+
+.login-box button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.back-link{
+
+    display:block;
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#cbd5e1;
+
+    text-decoration:none;
+
+}
+
+/* ===========================
+   LOGIN FORM
+=========================== */
+
+.login-panel input{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#1b2740;
+
+    color:white;
+
+    font-size:17px;
+
+}
+
+.login-panel input:focus{
+
+    outline:none;
+
+    border:2px solid #d52b1e;
+
+}
+
+.login-panel button{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#e53935,#b11813);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.login-panel button:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.back-link{
+
+    display:block;
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#cfd8e6;
+
+    text-decoration:none;
+
+}
+
+.back-link:hover{
+
+    color:white;
+
+}
+
+.error-message{
+
+    background:#8b1e1e;
+
+    color:white;
+
+    padding:15px;
 
     border-radius:10px;
 
     margin-bottom:20px;
 
-    font-size:16px;
-
-}
-
-.login-btn{
-    width:100%;
-    padding:18px;
-
-    background:#d52b1e;
-
-    border:none;
-
-    color:white;
-
-    font-size:20px;
-
-    border-radius:8px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-}
-
-
-.secure{
-
     text-align:center;
 
-    margin-top:20px;
-
-    color:#b5b5b5;
-
-    font-size:14px;
-
-}
-.login-btn:hover{
-
-    background:#b71c11;
-
-}
-
-.login-card input:focus{
-
-    outline:none;
-
-    border-color:#d52b1e;
-
-    box-shadow:0 0 10px rgba(213,43,30,.4);
-
-}
-
-.landmark-footer{
-
-    position:absolute;
-
-    bottom:20px;
-
-    right:40px;
-
-    color:#b5b5b5;
-
-    font-size:16px;
-
-    letter-spacing:2px;
+    font-weight:bold;
 
 }

@@ -78,9 +78,33 @@ urlpatterns = [
     ),
 
     path(
-        'reports/',
-        views.reports,
-        name='reports'
-    ),
+    'reports/',
+    views.reports,
+    name='reports'
+),
+
+path(
+    'administration/users/',
+    views.user_management,
+    name='user_management'
+),
+
+path(
+    'administration/users/create/',
+    views.create_employee,
+    name='create_employee'
+),
+
+path(
+    "user-login/",
+    views.user_login,
+    name="user_login",
+),
+
+path(
+    "admin-login/",
+    views.admin_login,
+    name="admin_login",
+),
 
 ]

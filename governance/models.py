@@ -170,3 +170,51 @@ class WellTargetHistory(models.Model):
 
     def __str__(self):
         return self.action
+class EmployeeProfile(models.Model):
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    phone_number = models.CharField(
+        max_length=30,
+        blank=True
+    )
+
+    address = models.TextField(
+        blank=True
+    )
+
+    department = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    role = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    profile_photo = models.ImageField(
+        upload_to="profiles/",
+        blank=True,
+        null=True
+    )
+
+    id_document = models.FileField(
+        upload_to="employee_ids/",
+        blank=True,
+        null=True
+    )
+
+    is_active_employee = models.BooleanField(
+        default=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return self.user.username

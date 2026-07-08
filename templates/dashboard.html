@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -256,53 +257,43 @@ Recent Activity
 
 <table class="table">
 
-<tr>
+    {% if documents %}
 
-<td>
+        {% for document in documents %}
 
-Patricia uploaded a document
+        <tr>
 
-</td>
+            <td>
 
-<td>
+                {{ document.uploaded_by.username }} uploaded
 
-10:42
+                {{ document.file.name }}
 
-</td>
+            </td>
 
-</tr>
+            <td>
 
-<tr>
+                {{ document.upload_date|date:"H:i" }}
 
-<td>
+            </td>
 
-Carlos completed a review
+        </tr>
 
-</td>
+        {% endfor %}
 
-<td>
+    {% else %}
 
-09:58
+        <tr>
 
-</td>
+            <td>
 
-</tr>
+                No recent activity available.
 
-<tr>
+            </td>
 
-<td>
+        </tr>
 
-Maria approved Alpha-01
-
-</td>
-
-<td>
-
-09:14
-
-</td>
-
-</tr>
+    {% endif %}
 
 </table>
 
@@ -329,11 +320,11 @@ Platform Statistics
 
 <strong>
 
-Users Online
+Registered Users
 
 </strong>
 
-6
+Coming Soon
 
 </p>
 
@@ -345,7 +336,7 @@ Workflow Completion
 
 </strong>
 
-87%
+Coming Soon
 
 </p>
 
@@ -369,7 +360,7 @@ Average Review Time
 
 </strong>
 
-2.3 Days
+Coming Soon
 
 </p>
 
@@ -381,170 +372,8 @@ Average Review Time
 
 </div>
 
-<script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-new Chart(
-
-    document.getElementById('statusChart'),
-
-    {
-
-        type: 'doughnut',
-
-        data: {
-
-            labels: [
-
-                'Draft',
-
-                'Review',
-
-                'Validated',
-
-                'Approved'
-
-            ],
-
-            datasets: [
-
-                {
-
-                    data: [
-
-                        {{ draft_count }},
-
-                        {{ review_count }},
-
-                        {{ validated_count }},
-
-                        {{ approved_count }}
-
-                    ],
-
-                    backgroundColor: [
-
-                        '#2563EB',
-
-                        '#F59E0B',
-
-                        '#10B981',
-
-                        '#8B5CF6'
-
-                    ]
-
-                }
-
-            ]
-
-        },
-
-        options: {
-
-            responsive: true,
-
-            aspectRatio: 2,
-
-            plugins: {
-
-                legend: {
-
-                    position: 'bottom'
-
-                }
-
-            }
-
-        }
-
-    }
-
-);
-
-new Chart(
-
-    document.getElementById('documentChart'),
-
-    {
-
-        type: 'line',
-
-        data: {
-
-            labels: [
-
-                'Jan',
-
-                'Feb',
-
-                'Mar',
-
-                'Apr',
-
-                'May',
-
-                'Jun'
-
-            ],
-
-            datasets: [
-
-                {
-
-                    label: 'Documents',
-
-                    data: [
-
-                        1,
-
-                        2,
-
-                        4,
-
-                        6,
-
-                        7,
-
-                        {{ document_count }}
-
-                    ],
-
-                    borderColor: '#2563EB',
-
-                    backgroundColor: 'rgba(37,99,235,0.15)',
-
-                    fill: true,
-
-                    tension: 0.35
-
-                }
-
-            ]
-
-        },
-
-        options: {
-
-            responsive: true,
-
-            aspectRatio: 2,
-
-            scales: {
-
-                y: {
-
-                    beginAtZero: true
-
-                }
-
-            }
-
-        }
-
-    }
-
-);
-
-</script>
+<script src="{% static 'js/dashboard.js' %}"></script>
 
 {% endblock %}
