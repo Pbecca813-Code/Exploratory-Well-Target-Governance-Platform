@@ -218,3 +218,109 @@ class EmployeeProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    # =====================================================
+# ADMINISTRATOR ACCESS REQUEST
+# =====================================================
+
+class AdministratorAccessRequest(models.Model):
+
+    STATUS_CHOICES = [
+        ("PENDING", "Pending"),
+        ("APPROVED", "Approved"),
+        ("REJECTED", "Rejected"),
+    ]
+
+    IDENTIFICATION_CHOICES = [
+        ("COMPANY_BADGE", "Company ID Badge"),
+        ("NATIONAL_ID", "National ID Card"),
+        ("PASSPORT", "Passport"),
+        ("DRIVERS_LICENSE", "Driver's License"),
+        ("OTHER", "Other"),
+    ]
+
+    # =====================================================
+    # PERSONAL INFORMATION
+    # =====================================================
+
+    first_name = models.CharField(
+        max_length=100
+    )
+
+    last_name = models.CharField(
+        max_length=100
+    )
+
+    company_email = models.EmailField()
+
+    employee_id = models.CharField(
+        max_length=50,
+        blank=True
+    )
+
+    # =====================================================
+    # ORGANIZATION INFORMATION
+    # =====================================================
+
+    company = models.CharField(
+        max_length=150
+    )
+
+    department = models.CharField(
+        max_length=150
+    )
+
+    job_title = models.CharField(
+        max_length=150
+    )
+
+    # =====================================================
+    # IDENTITY VERIFICATION
+    # =====================================================
+
+    identification_type = models.CharField(
+        max_length=30,
+        choices=IDENTIFICATION_CHOICES,
+        blank=True
+    )
+
+    identification_document = models.FileField(
+        upload_to="uploads/admin_requests/documents/",
+        blank=True,
+        null=True
+   )
+
+    profile_photo = models.ImageField(
+        upload_to="uploads/admin_requests/photos/",
+        blank=True,
+        null=True
+    )
+
+    # =====================================================
+    # REQUEST INFORMATION
+    # =====================================================
+
+    reason = models.TextField()
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="PENDING"
+    )
+
+    review_comments = models.TextField(
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    reviewed_at = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    def __str__(self):
+
+        return f"{self.first_name} {self.last_name} ({self.status})"

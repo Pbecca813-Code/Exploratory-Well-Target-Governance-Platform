@@ -107,4 +107,21 @@ path(
     name="admin_login",
 ),
 
+path(
+    "forgot-password/",
+    views.forgot_password,
+    name="forgot_password",
+),
+
+path(
+    "forgot-username/",
+    views.forgot_username,
+    name="forgot_username",
+),
+
+path(
+    "request-admin-access/",
+    views.request_admin_access,
+    name="request_admin_access",
+),
 ]

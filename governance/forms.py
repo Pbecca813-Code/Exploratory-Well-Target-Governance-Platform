@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .models import (
     WellTarget,
     WellTargetDocument,
+    AdministratorAccessRequest,
 )
 
 
@@ -116,3 +117,86 @@ class EmployeeCreateForm(forms.ModelForm):
             )
 
         return cleaned_data
+    
+    # =====================================================
+# ADMINISTRATOR ACCESS REQUEST FORM
+# =====================================================
+
+class AdministratorAccessRequestForm(forms.ModelForm):
+
+    confirm_information = forms.BooleanField(
+        required=True,
+        label="I confirm that the information provided is correct."
+    )
+
+    class Meta:
+
+        model = AdministratorAccessRequest
+
+        fields = [
+
+            "first_name",
+            "last_name",
+            "company_email",
+            "employee_id",
+
+            "company",
+            "department",
+            "job_title",
+
+            "identification_type",
+            "identification_document",
+            "profile_photo",
+
+            "reason",
+
+     ]
+
+        widgets = {
+
+            "first_name": forms.TextInput(attrs={
+                "placeholder": "First Name"
+            }),
+
+            "last_name": forms.TextInput(attrs={
+                "placeholder": "Last Name"
+            }),
+
+            "company_email": forms.EmailInput(attrs={
+                "placeholder": "Company Email"
+            }),
+
+            "employee_id": forms.TextInput(attrs={
+                "placeholder": "Employee ID (Optional)"
+            }),
+
+            "company": forms.TextInput(attrs={
+                "placeholder": "Company"
+            }),
+
+            "department": forms.TextInput(attrs={
+                "placeholder": "Department / Business Unit"
+            }),
+
+            "job_title": forms.TextInput(attrs={
+                "placeholder": "Job Title"
+            }),
+
+            "reason": forms.Textarea(attrs={
+                "placeholder": "Reason for requesting administrator access...",
+                "rows": 4,
+            }),
+
+            "identification_type": forms.Select(attrs={
+                "class": "form-control"
+            }),
+
+            "identification_document": forms.ClearableFileInput(attrs={
+                "class": "form-control"
+            }),
+
+            "profile_photo": forms.ClearableFileInput(attrs={
+                "class": "form-control"
+           }),
+
+        }

@@ -1,0 +1,264 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Request Administrator Access</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/login.css' %}">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- LEFT -->
+
+    <section class="left-side">
+
+        <div class="banner">
+
+            Exploratory WellTarget Governance Platform
+
+        </div>
+
+        <div class="overlay">
+
+            <h2>Administrator Access</h2>
+
+            <p>
+
+                Submit your request for administrator access.
+                Your request will be verified before activation.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- RIGHT -->
+
+    <section class="right-side">
+
+        <div class="login-panel">
+
+            <h1>Request Administrator Access</h1>
+
+            <p>
+
+                Complete the form below.
+
+            </p>
+
+            <form method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+<div class="form-grid">
+
+    <!-- LEFT COLUMN -->
+
+    <div>
+
+        <h3 class="form-section">
+
+            👤 Personal Information
+
+        </h3>
+
+        <div class="form-group">
+            {{ form.first_name }}
+        </div>
+
+        <div class="form-group">
+            {{ form.last_name }}
+        </div>
+
+        <div class="form-group">
+            {{ form.company_email }}
+        </div>
+
+        <div class="form-group">
+            {{ form.employee_id }}
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT COLUMN -->
+
+    <div>
+
+        <h3 class="form-section">
+
+            🏢 Organization Information
+
+        </h3>
+
+        <div class="form-group">
+            {{ form.company }}
+        </div>
+
+        <div class="form-group">
+            {{ form.department }}
+        </div>
+
+        <div class="form-group">
+            {{ form.job_title }}
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- IDENTITY VERIFICATION -->
+<!-- ========================================= -->
+
+<h3 class="form-section">
+
+    🪪 Identity Verification
+
+</h3>
+
+<div class="form-grid">
+
+    <!-- LEFT -->
+
+    <div>
+
+        <div class="form-group">
+
+            <label>Identification Type</label>
+
+            {{ form.identification_type }}
+
+        </div>
+
+        {% include "components/upload_card.html" with
+    input_id="id_identification_document"
+    field_name="identification_document"
+    icon="📄"
+    title="Upload Identification Document"
+    subtitle="PDF • JPG • PNG"
+    preview_id="document-preview"
+    placeholder_id="document-placeholder"
+    actions_id="document-actions"
+%}
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div>
+
+        {% include "components/upload_card.html" with
+    input_id="id_profile_photo"
+    field_name="profile_photo"
+    icon="👤"
+    title="Upload Profile Photo"
+    subtitle="JPG • PNG"
+    preview_id="profile-preview"
+    placeholder_id="profile-placeholder"
+    actions_id="profile-actions"
+%}
+
+        <div class="photo-preview">
+
+            <img
+                id="photo-preview"
+                src=""
+                style="display:none;"
+                alt="Profile Preview">
+
+            <div id="photo-placeholder">
+
+                👤
+
+                <br><br>
+
+                No Photo Selected
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- BUSINESS JUSTIFICATION -->
+<!-- ========================================= -->
+
+<h3 class="form-section">
+
+    📝 Business Justification
+
+</h3>
+
+<div class="form-group">
+
+    {{ form.reason }}
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- DECLARATION -->
+<!-- ========================================= -->
+
+<h3 class="form-section">
+
+    ✔ Declaration
+
+</h3>
+
+<div class="checkbox-group">
+
+    {{ form.confirm_information }}
+
+    <label>
+
+        I confirm that the information provided is correct.
+
+    </label>
+
+</div>
+
+<button type="submit">
+
+    SUBMIT REQUEST
+
+</button>
+
+            </form>
+
+            <a class="back-link"
+               href="{% url 'admin_login' %}">
+
+                ← Back to Administrator Login
+
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="{% static 'js/request_admin_access.js' %}"></script>
+
+</body>
+
+</html>

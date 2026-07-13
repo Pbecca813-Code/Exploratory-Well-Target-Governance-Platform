@@ -1,113 +1,84 @@
-{% load static %}
+{% extends "layouts/auth_base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Administrator Login</title>
-
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-
-</head>
-
-<body>
-
-<div class="login-container">
-
-    <!-- LEFT -->
-
-    <section class="left-side">
-
-        <div class="banner">
-
-            Exploratory WellTarget Governance Platform
-
-        </div>
-
-        <div class="overlay">
+{% block title %}
+Administrator Login
+{% endblock %}
 
 
-            <h2>Administrator Workspace</h2>
+{% block left_content %}
 
-            <p>
+<h2>
+Administrator Workspace
+</h2>
 
-                Sign in to access Well Targets,
-                Reviews, Documents and Validation.
+<p>
+Sign in to access Well Targets,
+Reviews,
+Documents and Validation.
+</p>
 
-            </p>
+{% endblock %}
 
-        </div>
 
-    </section>
+{% block auth_content %}
 
-    <!-- RIGHT -->
+<h1>Administrator Login</h1>
 
-    <section class="right-side">
+<p>
+Enter your credentials to continue.
+</p>
 
-        <div class="login-panel">
-
-            <h1>Administrator Login</h1>
-
-            <p>
-
-                Enter your credentials to continue.
-
-            </p>
 {% if messages %}
-
     {% for message in messages %}
-
         <div class="error-message">
-
             {{ message }}
-
         </div>
-
     {% endfor %}
-
 {% endif %}
-            <form method="post">
 
-                {% csrf_token %}
+<form method="post">
 
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    required>
+    {% csrf_token %}
 
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    required>
+    <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        required>
 
-                <button type="submit">
+    <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        required>
 
-                    SIGN IN
+    <button type="submit">
+        SIGN IN
+    </button>
 
-                </button>
+</form>
 
-            </form>
+<div class="login-links">
 
-            <a class="back-link"
-               href="{% url 'login' %}">
+    <a href="{% url 'forgot_password' %}">
+        Forgot Password?
+    </a>
 
-                ← Back to Workspace Selection
+    <a href="{% url 'forgot_username' %}">
+        Forgot Username?
+    </a>
 
-            </a>
-
-        </div>
-
-    </section>
+    <a href="{% url 'request_admin_access' %}">
+        Request Administrator Access
+    </a>
 
 </div>
 
-</body>
+<a class="back-link"
+   href="{% url 'login' %}">
 
-</html>
+    ← Back to Workspace Selection
+
+</a>
+
+{% endblock %}

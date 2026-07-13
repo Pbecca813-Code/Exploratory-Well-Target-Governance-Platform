@@ -1,0 +1,81 @@
+<div class="upload-component">
+
+    <input
+        type="file"
+        id="{{ input_id }}"
+        name="{{ field_name }}"
+        class="upload-input">
+
+    <label
+        for="{{ input_id }}"
+        class="upload-card">
+
+        <div class="upload-icon">
+
+            {{ icon }}
+
+        </div>
+
+        <h4>
+
+            {{ title }}
+
+        </h4>
+
+        <p>
+
+            {{ subtitle }}
+
+        </p>
+
+    </label>
+
+    <div class="upload-preview">
+
+        <img
+            id="{{ preview_id }}"
+            class="preview-image"
+            style="display:none;">
+
+        <div
+            id="{{ placeholder_id }}"
+            class="preview-placeholder">
+
+            {{ icon }}
+
+        </div>
+
+    </div>
+
+    <div
+        id="{{ actions_id }}"
+        class="upload-actions"
+        style="display:none;">
+
+        <button
+            type="button"
+            class="upload-btn">
+
+            👁 View
+
+        </button>
+
+        <button
+            type="button"
+            class="upload-btn">
+
+            ✏ Change
+
+        </button>
+
+        <button
+            type="button"
+            class="upload-btn danger">
+
+            🗑 Delete
+
+        </button>
+
+    </div>
+
+</div>

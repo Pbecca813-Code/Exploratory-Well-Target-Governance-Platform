@@ -1,0 +1,183 @@
+/* =====================================================
+   UPLOAD COMPONENT
+===================================================== */
+
+.upload-component{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+/* Hide default file input */
+
+.upload-input{
+
+    display:none;
+
+}
+
+/* Upload Card */
+
+.upload-card{
+
+    width:100%;
+
+    min-height:180px;
+
+    border:2px dashed #4c5b7a;
+
+    border-radius:16px;
+
+    background:#1b2740;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    text-align:center;
+
+}
+
+.upload-card:hover{
+
+    border-color:#d52b1e;
+
+    background:#24314d;
+
+}
+
+.upload-icon{
+
+    font-size:48px;
+
+    margin-bottom:15px;
+
+}
+
+.upload-card h4{
+
+    color:white;
+
+    font-size:18px;
+
+    margin-bottom:8px;
+
+}
+
+.upload-card p{
+
+    color:#bfc8d8;
+
+    font-size:14px;
+
+}
+
+/* ==========================================
+   PREVIEW
+========================================== */
+
+.upload-preview{
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.preview-image{
+
+    width:180px;
+
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    border:2px solid #3d4b66;
+
+}
+
+.preview-placeholder{
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:14px;
+
+    background:#1b2740;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:55px;
+
+    color:#bfc8d8;
+
+}
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+.upload-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+}
+
+.upload-btn{
+
+    padding:10px 16px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2b3957;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.upload-btn:hover{
+
+    background:#3d4b66;
+
+}
+
+.upload-btn.danger{
+
+    background:#b11813;
+
+}
+
+.upload-btn.danger:hover{
+
+    background:#d52b1e;
+
+}

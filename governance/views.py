@@ -25,6 +25,7 @@ from .forms import (
     WellTargetForm,
     WellTargetDocumentForm,
     EmployeeCreateForm,
+    AdministratorAccessRequestForm,
 )
 
 
@@ -409,4 +410,98 @@ def admin_login(request):
     return render(
         request,
         "registration/admin_login.html"
+    )
+# =====================================================
+# FORGOT PASSWORD
+# =====================================================
+
+from django.contrib import messages
+
+
+def forgot_password(request):
+
+    if request.method == "POST":
+
+        email = request.POST.get("email")
+
+        messages.success(
+
+            request,
+
+            "If this email address exists, a password reset link will be sent."
+
+        )
+
+    return render(
+
+        request,
+
+        "registration/forgot_password.html"
+
+    )
+# =====================================================
+# FORGOT USERNAME
+# =====================================================
+
+def forgot_username(request):
+
+    if request.method == "POST":
+
+        email = request.POST.get("email")
+
+        messages.success(
+
+            request,
+
+            "If this email address exists, your username will be sent."
+
+        )
+
+    return render(
+
+        request,
+
+        "registration/forgot_username.html"
+
+    )
+# =====================================================
+# REQUEST ADMINISTRATOR ACCESS
+# =====================================================
+
+def request_admin_access(request):
+
+    if request.method == "POST":
+
+        form = AdministratorAccessRequestForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+
+                request,
+
+                "Your administrator access request has been submitted successfully. It is now pending review."
+
+            )
+
+            return redirect("request_admin_access")
+
+    else:
+
+        form = AdministratorAccessRequestForm()
+
+    return render(
+
+        request,
+
+        "registration/request_admin_access.html",
+
+        {
+
+            "form": form
+
+        }
+
     )

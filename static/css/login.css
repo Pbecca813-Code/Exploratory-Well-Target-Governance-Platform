@@ -22,9 +22,13 @@ body{
 
 .login-container{
 
-    display:flex;
+    display:grid;
 
-    height:100vh;
+    grid-template-columns:38% 62%;
+
+    min-height:100vh;
+
+    width:100%;
 
 }
 
@@ -34,15 +38,19 @@ body{
 
 .left-side{
 
-    width:55%;
-
     position:relative;
+
+    min-height:100vh;
 
     background:url("../images/seismic.jpg");
 
     background-size:cover;
 
-    background-position:center;
+    background-position:30% center;
+
+    background-repeat:no-repeat;
+
+    overflow:hidden;
 
 }
 
@@ -92,9 +100,11 @@ body{
 
     position:absolute;
 
-    top:170px;
+    top:130px;
 
-    left:60px;
+    left:50px;
+
+    right:50px;
 
     z-index:5;
 
@@ -112,21 +122,25 @@ body{
 
 .overlay h2{
 
-    font-size:70px;
+    font-size:56px;
+
+    font-weight:700;
 
     color:#d52b1e;
 
-    margin-bottom:20px;
+    line-height:1.1;
+
+    margin-bottom:18px;
 
 }
 
 .overlay p{
 
-    width:520px;
+    max-width:420px;
 
-    font-size:24px;
+    font-size:20px;
 
-    line-height:1.6;
+    line-height:1.5;
 
 }
 
@@ -136,8 +150,6 @@ body{
 
 .right-side{
 
-    width:45%;
-
     display:flex;
 
     justify-content:center;
@@ -145,6 +157,8 @@ body{
     align-items:center;
 
     background:#07101c;
+
+    padding:40px;
 
 }
 
@@ -154,9 +168,11 @@ body{
 
 .login-panel{
 
-    width:500px;
+    width:min(950px,100%);
 
-    padding:50px;
+    max-width:100%;
+
+    padding:45px;
 
     border-radius:25px;
 
@@ -481,5 +497,170 @@ body{
     text-align:center;
 
     font-weight:bold;
+
+}
+/* =====================================================
+   LOGIN LINKS
+===================================================== */
+
+.login-links{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:15px;
+
+    margin-bottom:18px;
+
+}
+
+.login-links a{
+
+    color:#cfd8e6;
+
+    text-decoration:none;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+.login-links a:hover{
+
+    color:#d52b1e;
+
+}
+
+/* ==========================================
+   FORM GROUP
+========================================== */
+
+.form-group{
+
+    margin-bottom:18px;
+
+}
+
+.form-group textarea{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#1b2740;
+
+    color:white;
+
+    font-size:17px;
+
+    resize:vertical;
+
+}
+
+.form-group textarea:focus{
+
+    outline:none;
+
+    border:2px solid #d52b1e;
+
+}
+
+/* ==========================================
+   CHECKBOX
+========================================== */
+
+.checkbox-group{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+    color:#cfd8e6;
+
+    font-size:14px;
+
+    margin:20px 0;
+
+}
+
+.checkbox-group input{
+
+    width:auto !important;
+
+    margin-top:4px;
+
+}
+
+/* ==========================================
+   FORM SECTION TITLES
+========================================== */
+
+.form-section{
+
+    color:#ffffff;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    margin-top:28px;
+
+    margin-bottom:15px;
+
+    padding-bottom:8px;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+}
+
+.section-text{
+
+    color:#bfc8d8;
+
+    font-size:14px;
+
+    margin-bottom:18px;
+
+}
+
+/* ==========================================
+   TWO COLUMN FORM
+========================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+
+    align-items:start;
+
+    margin-bottom:30px;
+
+}
+
+@media (max-width:900px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
 
 }
