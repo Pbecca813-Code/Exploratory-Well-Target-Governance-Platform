@@ -4,29 +4,24 @@
         type="file"
         id="{{ input_id }}"
         name="{{ field_name }}"
-        class="upload-input">
+        class="upload-input"
+        accept=".jpg,.jpeg,.png,.pdf">
 
     <label
-        for="{{ input_id }}"
-        class="upload-card">
+        class="upload-card"
+        for="{{ input_id }}">
 
         <div class="upload-icon">
-
             {{ icon }}
-
         </div>
 
-        <h4>
+        <h4>{{ title }}</h4>
 
-            {{ title }}
+        <p>{{ subtitle }}</p>
 
-        </h4>
-
-        <p>
-
-            {{ subtitle }}
-
-        </p>
+        <small style="color:#a8b5cf;">
+            Click here to upload
+        </small>
 
     </label>
 

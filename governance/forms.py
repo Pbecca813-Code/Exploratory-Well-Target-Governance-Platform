@@ -191,12 +191,14 @@ class AdministratorAccessRequestForm(forms.ModelForm):
                 "class": "form-control"
             }),
 
-            "identification_document": forms.ClearableFileInput(attrs={
-                "class": "form-control"
+            "identification_document": forms.FileInput(attrs={
+                "id": "id_identification_document",
+                "class": "upload-input"
             }),
 
-            "profile_photo": forms.ClearableFileInput(attrs={
-                "class": "form-control"
-           }),
+            "profile_photo": forms.FileInput(attrs={
+                "id": "id_profile_photo",
+               "class": "upload-input"
+            }),
 
         }

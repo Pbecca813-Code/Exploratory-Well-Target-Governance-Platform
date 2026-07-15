@@ -13,7 +13,10 @@
     <title>Request Administrator Access</title>
 
     <link rel="stylesheet"
-          href="{% static 'css/login.css' %}">
+      href="{% static 'css/login.css' %}">
+
+    <link rel="stylesheet"
+      href="{% static 'css/upload.css' %}">
 
 </head>
 
@@ -52,15 +55,36 @@
 
         <div class="login-panel">
 
+    <div class="page-header">
+
+        <div>
+
             <h1>Request Administrator Access</h1>
 
             <p>
-
                 Complete the form below.
-
             </p>
 
-            <form method="post" enctype="multipart/form-data">
+        </div>
+
+        <div class="profile-header-preview">
+
+            <img
+                id="header-profile-preview"
+                src=""
+                alt="Profile Preview">
+
+            <div id="header-profile-placeholder">
+
+                👤
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
 
                 {% csrf_token %}
 <div class="form-grid">
@@ -144,16 +168,7 @@
 
         </div>
 
-        {% include "components/upload_card.html" with
-    input_id="id_identification_document"
-    field_name="identification_document"
-    icon="📄"
-    title="Upload Identification Document"
-    subtitle="PDF • JPG • PNG"
-    preview_id="document-preview"
-    placeholder_id="document-placeholder"
-    actions_id="document-actions"
-%}
+        {% include "components/upload_card.html" with input_id="id_identification_document" field_name="identification_document" icon="📄" title="Upload Identification Document" subtitle="PDF • JPG • PNG" preview_id="document-preview" placeholder_id="document-placeholder" actions_id="document-actions" %}
 
     </div>
 
@@ -161,36 +176,7 @@
 
     <div>
 
-        {% include "components/upload_card.html" with
-    input_id="id_profile_photo"
-    field_name="profile_photo"
-    icon="👤"
-    title="Upload Profile Photo"
-    subtitle="JPG • PNG"
-    preview_id="profile-preview"
-    placeholder_id="profile-placeholder"
-    actions_id="profile-actions"
-%}
-
-        <div class="photo-preview">
-
-            <img
-                id="photo-preview"
-                src=""
-                style="display:none;"
-                alt="Profile Preview">
-
-            <div id="photo-placeholder">
-
-                👤
-
-                <br><br>
-
-                No Photo Selected
-
-            </div>
-
-        </div>
+        {% include "components/upload_card.html" with input_id="id_profile_photo" field_name="profile_photo" icon="👤" title="Upload Profile Photo" subtitle="JPG • PNG" preview_id="profile-preview" placeholder_id="profile-placeholder" actions_id="profile-actions" %}
 
     </div>
 

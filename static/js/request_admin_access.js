@@ -1,35 +1,70 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-    const photoInput = document.getElementById("id_profile_photo");
-    const photoPreview = document.getElementById("photo-preview");
-    const photoPlaceholder = document.getElementById("photo-placeholder");
+    setupUpload(
+        "id_profile_photo",
+        "profile-preview",
+        "profile-placeholder",
+        "profile-actions"
+    );
 
-    if (!photoInput) return;
+    setupUpload(
+        "id_identification_document",
+        "document-preview",
+        "document-placeholder",
+        "document-actions"
+    );
 
-    photoInput.addEventListener("change", function () {
+});
 
-        const file = this.files[0];
+function setupUpload(inputId, previewId, placeholderId, actionsId){
 
-        if (!file) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    const placeholder = document.getElementById(placeholderId);
+    const actions = document.getElementById(actionsId);
 
-            photoPreview.style.display = "none";
-            photoPlaceholder.style.display = "block";
+    if(!input) return;
+
+    input.addEventListener("change", function(){
+
+        if(!this.files.length){
+
+            preview.style.display="none";
+            placeholder.style.display="flex";
+            actions.style.display="none";
+
             return;
 
         }
 
-        const reader = new FileReader();
+        const file=this.files[0];
 
-        reader.onload = function (e) {
+        if(file.type.startsWith("image")){
 
-            photoPreview.src = e.target.result;
-            photoPreview.style.display = "block";
-            photoPlaceholder.style.display = "none";
+            const reader=new FileReader();
 
-        };
+            reader.onload=function(e){
 
-        reader.readAsDataURL(file);
+                preview.src=e.target.result;
+
+                preview.style.display="block";
+                placeholder.style.display="none";
+                actions.style.display="flex";
+
+            };
+
+            reader.readAsDataURL(file);
+
+        }else{
+
+            placeholder.innerHTML="📄";
+
+            preview.style.display="none";
+            placeholder.style.display="flex";
+            actions.style.display="flex";
+
+        }
 
     });
 
-});
+}
