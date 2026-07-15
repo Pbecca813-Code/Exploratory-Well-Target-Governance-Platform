@@ -1,4 +1,3 @@
-import os
 """
 Django settings for config project.
 
@@ -153,24 +152,20 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # EMAIL CONFIGURATION
 # ===================================================
 
+import os
+
 EMAIL_BACKEND = os.getenv(
     "EMAIL_BACKEND",
     "django.core.mail.backends.smtp.EmailBackend"
 )
 
-EMAIL_HOST = os.getenv(
-    "EMAIL_HOST",
-    "smtp.gmail.com"
-)
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
 
-EMAIL_PORT = int(
-    os.getenv("EMAIL_PORT", 587)
-)
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "465"))
 
-EMAIL_USE_TLS = os.getenv(
-    "EMAIL_USE_TLS",
-    "True"
-) == "True"
+EMAIL_USE_TLS = False
+
+EMAIL_USE_SSL = True
 
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 
@@ -180,3 +175,9 @@ DEFAULT_FROM_EMAIL = os.getenv(
     "DEFAULT_FROM_EMAIL",
     "WellTarget Governance <exploratory.welltarget@gmail.com>"
 )
+
+print("EMAIL_BACKEND =", EMAIL_BACKEND)
+print("EMAIL_HOST =", EMAIL_HOST)
+print("EMAIL_PORT =", EMAIL_PORT)
+print("EMAIL_USE_SSL =", EMAIL_USE_SSL)
+print("EMAIL_HOST_USER =", EMAIL_HOST_USER)
