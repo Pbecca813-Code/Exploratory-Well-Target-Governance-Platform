@@ -1,0 +1,303 @@
+/* =====================================================
+   APPLICATION LAYOUT
+===================================================== */
+
+.login-container{
+
+    display:grid;
+
+    grid-template-columns:40% 60%;
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+/* =====================================================
+   LEFT PANEL
+===================================================== */
+
+.left-side{
+
+    position:relative;
+
+    min-height:100vh;
+
+    background:url("../images/seismic.jpg");
+
+    background-position:center;
+
+    background-size:cover;
+
+    background-repeat:no-repeat;
+
+}
+
+.left-side::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+}
+
+/* =====================================================
+   BANNER
+===================================================== */
+
+.banner{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    height:60px;
+
+    background:#d52b1e;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 25px;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    z-index:10;
+
+}
+
+/* =====================================================
+   LEFT TEXT
+===================================================== */
+
+.overlay{
+
+    position:absolute;
+
+    left:40px;
+
+    top:120px;
+
+    width:420px;
+
+    z-index:5;
+
+}
+
+.overlay h2{
+
+    font-size:52px;
+
+    color:#ef3b2d;
+
+    margin-bottom:20px;
+
+}
+
+.overlay p{
+
+    font-size:18px;
+
+    color:white;
+
+}
+
+/* =====================================================
+   RIGHT PANEL
+===================================================== */
+
+.right-side{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+}
+
+/* =====================================================
+   FORM CONTAINER
+===================================================== */
+
+.login-panel{
+
+    width:100%;
+
+    max-width:900px;
+
+    max-height:92vh;
+
+    overflow-y:auto;
+
+    background:#10192b;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+}
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+.profile-header-preview{
+
+    width:145px;
+
+    height:145px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:#24324d;
+
+    border:3px solid #5b6f98;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+    box-shadow:0 8px 22px rgba(0,0,0,.35);
+
+}
+
+.profile-header-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    display:none;
+
+}
+
+#header-profile-placeholder{
+
+    font-size:72px;
+
+    color:#7f5af0;
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width:1200px){
+
+    .login-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .left-side{
+
+        display:none;
+
+    }
+
+    .right-side{
+
+        padding:25px;
+
+    }
+
+    .login-panel{
+
+        max-width:100%;
+
+    }
+
+}
+
+/* ==========================================
+   WORKSPACE CARDS
+========================================== */
+
+.workspace-card{
+    padding:35px;
+    border-radius:22px;
+    margin-bottom:30px;
+    cursor:pointer;
+    transition:.35s;
+    color:white;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+
+.workspace-card:hover{
+    transform:translateY(-8px);
+}
+
+.workspace-card h2{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.workspace-card span{
+    font-size:18px;
+    opacity:.95;
+}
+
+.user-card{
+    background:linear-gradient(
+        135deg,
+        #e53935,
+        #b11813
+    );
+}
+
+.admin-card{
+    background:linear-gradient(
+        135deg,
+        #3567b6,
+        #1b3d73
+    );
+}

@@ -135,22 +135,31 @@ class AdministratorAccessRequestForm(forms.ModelForm):
 
         fields = [
 
-            "first_name",
-            "last_name",
-            "company_email",
-            "employee_id",
+    # Personal Information
+    "first_name",
+    "last_name",
+    "company_email",
+    "mobile_number",
+    "home_address",
+    "employee_id",
 
-            "company",
-            "department",
-            "job_title",
+    # Organization Information
+    "company",
+    "department",
+    "job_title",
+    "company_phone",
+    "company_address",
+    "office_location",
 
-            "identification_type",
-            "identification_document",
-            "profile_photo",
+    # Identity Verification
+    "identification_type",
+    "identification_document",
+    "profile_photo",
 
-            "reason",
+    # Request
+    "reason",
 
-     ]
+]
 
         widgets = {
 
@@ -164,6 +173,14 @@ class AdministratorAccessRequestForm(forms.ModelForm):
 
             "company_email": forms.EmailInput(attrs={
                 "placeholder": "Company Email"
+            }),
+
+            "mobile_number": forms.TextInput(attrs={
+            "placeholder": "Mobile Number"
+           }),
+
+            "home_address": forms.TextInput(attrs={
+            "placeholder": "Home Address"
             }),
 
             "employee_id": forms.TextInput(attrs={
@@ -181,6 +198,18 @@ class AdministratorAccessRequestForm(forms.ModelForm):
             "job_title": forms.TextInput(attrs={
                 "placeholder": "Job Title"
             }),
+
+            "company_phone": forms.TextInput(attrs={
+            "placeholder": "Company Phone"
+            }),
+
+            "company_address": forms.TextInput(attrs={
+            "placeholder": "Company Address"
+            }),
+
+           "office_location": forms.TextInput(attrs={
+           "placeholder": "Office Location"
+           }),
 
             "reason": forms.Textarea(attrs={
                 "placeholder": "Reason for requesting administrator access...",

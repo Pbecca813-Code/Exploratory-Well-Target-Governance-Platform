@@ -7,36 +7,42 @@
         class="upload-input"
         accept=".jpg,.jpeg,.png,.pdf">
 
-    <label
-        class="upload-card"
-        for="{{ input_id }}">
+    <div class="upload-row">
 
-        <div class="upload-icon">
-            {{ icon }}
-        </div>
+        <label
+            class="upload-card"
+            for="{{ input_id }}">
 
-        <h4>{{ title }}</h4>
+            <div class="upload-icon">
+                {{ icon }}
+            </div>
 
-        <p>{{ subtitle }}</p>
+            <h4 class="upload-title">
+                {{ title }}
+            </h4>
 
-        <small style="color:#a8b5cf;">
-            Click here to upload
-        </small>
+            <p>{{ subtitle }}</p>
 
-    </label>
+            <small style="color:#a8b5cf;">
+                Click here to upload
+            </small>
 
-    <div class="upload-preview">
+        </label>
 
-        <img
-            id="{{ preview_id }}"
-            class="preview-image"
-            style="display:none;">
+        <div class="upload-preview">
 
-        <div
-            id="{{ placeholder_id }}"
-            class="preview-placeholder">
+            <img
+                id="{{ preview_id }}"
+                class="preview-image"
+                style="display:none;">
 
-            {{ icon }}
+            <div
+                id="{{ placeholder_id }}"
+                class="preview-placeholder">
+
+                {{ icon }}
+
+            </div>
 
         </div>
 

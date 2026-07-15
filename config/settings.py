@@ -139,7 +139,10 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOGIN_REDIRECT_URL = "/"
+
 LOGOUT_REDIRECT_URL = "/accounts/login/"
+
+PASSWORD_RESET_TIMEOUT = 3600
 
 MEDIA_URL = '/media/'
 

@@ -1,85 +1,38 @@
-{% load static %}
+{% extends "layouts/auth_base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}
+Workspace Gateway
+{% endblock %}
 
-<head>
+{% block left_content %}
 
-    <meta charset="UTF-8">
+<h1>
+    Welcome
+</h1>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<h2>
+    Workspace Gateway
+</h2>
 
-    <title>
+<p>
+    Govern, validate and approve exploratory well targets
+    through a secure workflow.
+</p>
 
-        Exploratory WellTarget Governance Platform
+{% endblock %}
 
-    </title>
 
-    <link rel="stylesheet"
-          href="{% static 'css/login.css' %}">
+{% block auth_content %}
 
-</head>
+<h1>
+    Choose Workspace
+</h1>
 
-<body>
+<p>
+    Continue to your secure environment.
+</p>
 
-<div class="login-container">
-
-    <!-- LEFT SIDE -->
-
-    <section class="left-side">
-
-        <div class="banner">
-
-            Exploratory WellTarget Governance Platform
-
-        </div>
-
-        <div class="overlay">
-
-            <h1>
-
-                Welcome
-
-            </h1>
-
-            <h2>
-
-                Workspace Gateway
-
-            </h2>
-
-            <p>
-
-                Govern, validate and approve
-                exploratory well targets through
-                a secure workflow.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- RIGHT SIDE -->
-
-    <section class="right-side">
-
-        <div class="login-panel">
-
-            <h1>
-
-                Choose Workspace
-
-            </h1>
-
-            <p>
-
-                Continue to your secure environment.
-
-            </p>
-
-            <div class="workspace-card user-card"
+<div class="workspace-card user-card"
      data-url="{% url 'user_login' %}">
 
     <h2>User Workspace</h2>
@@ -88,7 +41,7 @@
 
 </div>
 
-            <div class="workspace-card admin-card"
+<div class="workspace-card admin-card"
      data-url="{% url 'admin_login' %}">
 
     <h2>Administrator Workspace</h2>
@@ -97,13 +50,4 @@
 
 </div>
 
-        </div>
-
-    </section>
-
-</div>
-
-<script src="{% static 'js/login.js' %}"></script>
-
-</body>
-</html>
+{% endblock %}

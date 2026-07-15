@@ -1,113 +1,62 @@
-{% load static %}
+{% extends "layouts/auth_base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}
+User Login
+{% endblock %}
 
-<head>
+{% block left_content %}
 
-    <meta charset="UTF-8">
+<h1>Welcome</h1>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<h2>User Workspace</h2>
 
-    <title>User Login</title>
+<p>
+Sign in to access Well Targets,
+Reviews, Documents and Validation.
+</p>
 
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
-</head>
+{% block auth_content %}
 
-<body>
+<h1>User Login</h1>
 
-<div class="login-container">
+<p>
+Enter your credentials to continue.
+</p>
 
-    <!-- LEFT -->
-
-    <section class="left-side">
-
-        <div class="banner">
-
-            Exploratory WellTarget Governance Platform
-
-        </div>
-
-        <div class="overlay">
-
-        
-            <h2>User Workspace</h2>
-
-            <p>
-
-                Sign in to access Well Targets,
-                Reviews, Documents and Validation.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- RIGHT -->
-
-    <section class="right-side">
-
-        <div class="login-panel">
-
-            <h1>User Login</h1>
-
-            <p>
-
-                Enter your credentials to continue.
-
-            </p>
 {% if messages %}
-
     {% for message in messages %}
-
         <div class="error-message">
-
             {{ message }}
-
         </div>
-
     {% endfor %}
-
 {% endif %}
-            <form method="post">
 
-                {% csrf_token %}
+<form method="post">
 
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    required>
+    {% csrf_token %}
 
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    required>
+    <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        required>
 
-                <button type="submit">
+    <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        required>
 
-                    SIGN IN
+    <button type="submit">
+        SIGN IN
+    </button>
 
-                </button>
+</form>
 
-            </form>
+<a class="back-link" href="{% url 'login' %}">
+← Back to Workspace Selection
+</a>
 
-            <a class="back-link"
-               href="{% url 'login' %}">
-
-                ← Back to Workspace Selection
-
-            </a>
-
-        </div>
-
-    </section>
-
-</div>
-
-</body>
-
-</html>
+{% endblock %}

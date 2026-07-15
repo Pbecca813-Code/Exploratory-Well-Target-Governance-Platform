@@ -253,6 +253,18 @@ class AdministratorAccessRequest(models.Model):
 
     company_email = models.EmailField()
 
+    mobile_number = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True
+    )
+
+    home_address = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
     employee_id = models.CharField(
         max_length=50,
         blank=True
@@ -272,6 +284,24 @@ class AdministratorAccessRequest(models.Model):
 
     job_title = models.CharField(
         max_length=150
+    )
+
+    company_phone = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True
+    )
+
+    company_address = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
+    office_location = models.CharField(
+        max_length=150,
+        blank=True,
+        null=True
     )
 
     # =====================================================
