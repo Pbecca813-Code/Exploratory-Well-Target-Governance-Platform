@@ -15,6 +15,14 @@ class WellTarget(models.Model):
 
     target_name = models.CharField(max_length=200)
 
+    project = models.ForeignKey(
+    "Project",
+    on_delete=models.CASCADE,
+    related_name="well_targets",
+    null=True,
+    blank=True
+   )
+
     basin = models.CharField(max_length=100)
 
     lead_interpreter = models.ForeignKey(
@@ -354,3 +362,220 @@ class AdministratorAccessRequest(models.Model):
     def __str__(self):
 
         return f"{self.first_name} {self.last_name} ({self.status})"
+    
+# =====================================================
+# PROJECT
+# =====================================================
+
+class Project(models.Model):
+
+    PROJECT_STATUS = [
+        ("PLANNING", "Planning"),
+        ("ACTIVE", "Active"),
+        ("ON_HOLD", "On Hold"),
+        ("COMPLETED", "Completed"),
+        ("ARCHIVED", "Archived"),
+    ]
+
+    project_name = models.CharField(
+        max_length=200
+    )
+
+    description = models.TextField(
+        blank=True
+    )
+
+    lead_interpreter = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="led_projects"
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=PROJECT_STATUS,
+        default="PLANNING"
+    )
+
+    start_date = models.DateField(
+        null=True,
+        blank=True
+    )
+
+    end_date = models.DateField(
+        null=True,
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    def __str__(self):
+        return self.project_name
+    
+    # =====================================================
+# PROJECT MEMBER
+# =====================================================
+
+class ProjectMember(models.Model):
+
+    PROJECT_ROLE = [
+        ("LEAD_INTERPRETER", "Lead Interpreter"),
+        ("SENIOR_INTERPRETER", "Senior Interpreter"),
+        ("INTERPRETER", "Interpreter"),
+        ("REVIEWER", "Reviewer"),
+        ("VALIDATOR", "Validator"),
+        ("APPROVER", "Approver"),
+        ("VIEWER", "Viewer"),
+    ]
+
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name="members"
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="project_memberships"
+    )
+
+    role = models.CharField(
+        max_length=30,
+        choices=PROJECT_ROLE
+    )
+
+    assigned_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="assigned_project_members"
+    )
+
+    assigned_date = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    class Meta:
+        unique_together = ("project", "user")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.project.project_name}"
+    
+    # =====================================================
+# COMPANY
+# =====================================================
+
+class Company(models.Model):
+
+    name = models.CharField(
+        max_length=150,
+        unique=True
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    def __str__(self):
+        return self.name
+    
+    # =====================================================
+# DEPARTMENT
+# =====================================================
+
+class Department(models.Model):
+
+    name = models.CharField(
+        max_length=150,
+        unique=True
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    def __str__(self):
+        return self.name
+    
+    # =====================================================
+# BUSINESS UNIT
+# =====================================================
+
+class BusinessUnit(models.Model):
+
+    name = models.CharField(
+        max_length=150,
+        unique=True
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    def __str__(self):
+        return self.name
+    
+    # =====================================================
+# COUNTRY
+# =====================================================
+
+class Country(models.Model):
+
+    name = models.CharField(
+        max_length=100,
+        unique=True
+    )
+
+    def __str__(self):
+        return self.name
+    
+    # =====================================================
+# REGION
+# =====================================================
+
+class Region(models.Model):
+
+    name = models.CharField(
+        max_length=100,
+        unique=True
+    )
+
+    country = models.ForeignKey(
+        Country,
+        on_delete=models.CASCADE,
+        related_name="regions"
+    )
+
+    def __str__(self):
+        return self.name
+    
+    # =====================================================
+# BASIN
+# =====================================================
+
+class Basin(models.Model):
+
+    name = models.CharField(
+        max_length=150,
+        unique=True
+    )
+
+    region = models.ForeignKey(
+        Region,
+        on_delete=models.CASCADE,
+        related_name="basins"
+    )
+
+    def __str__(self):
+        return self.name
