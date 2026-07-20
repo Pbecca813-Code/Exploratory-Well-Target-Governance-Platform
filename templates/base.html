@@ -253,51 +253,176 @@ System Settings
 
 {% else %}
 
-<div class="sidebar-workspace">
-
-USER WORKSPACE
-
+<div class="sidebar-section-title">
+    USER WORKSPACE
 </div>
+
+<!-- MY PROJECTS -->
 
 <button class="sidebar-dropdown">
 
-<i class="bi bi-person-workspace me-2"></i>
+    <i class="bi bi-kanban-fill me-2"></i>
 
-My Workspace
+    My Projects
 
 </button>
 
 <div class="sidebar-menu">
 
-<a href="{% url 'well_targets' %}">
-<i class="bi bi-bullseye"></i>
-Well Targets
-</a>
+    <a href="#">
+        <i class="bi bi-folder2-open"></i>
+        My Assigned Projects
+    </a>
 
-<a href="{% url 'documents' %}">
-<i class="bi bi-file-earmark-text"></i>
-Documents
-</a>
+    <a href="#">
+        <i class="bi bi-people"></i>
+        My Teams
+    </a>
 
-<a href="{% url 'reviews' %}">
-<i class="bi bi-search"></i>
-Reviews
-</a>
+</div>
 
-<a href="{% url 'validation' %}">
-<i class="bi bi-patch-check"></i>
-Validation
-</a>
+<!-- WELL TARGETS -->
 
-<a href="{% url 'approvals' %}">
-<i class="bi bi-check2-square"></i>
-Approvals
-</a>
+<button class="sidebar-dropdown">
 
-<a href="{% url 'reports' %}">
-<i class="bi bi-bar-chart-line"></i>
-Reports
-</a>
+    <i class="bi bi-bullseye me-2"></i>
+
+    Well Targets
+
+</button>
+
+<div class="sidebar-menu">
+
+    <a href="{% url 'well_targets' %}">
+        <i class="bi bi-bullseye"></i>
+        My Well Targets
+    </a>
+
+    <a href="#">
+        <i class="bi bi-share"></i>
+        Shared Well Targets
+    </a>
+
+</div>
+
+<!-- DOCUMENTS -->
+
+<button class="sidebar-dropdown">
+
+    <i class="bi bi-file-earmark-text me-2"></i>
+
+    Documents
+
+</button>
+
+<div class="sidebar-menu">
+
+    <a href="{% url 'documents' %}">
+        <i class="bi bi-folder"></i>
+        My Documents
+    </a>
+
+    <a href="#">
+        <i class="bi bi-folder-symlink"></i>
+        Shared Documents
+    </a>
+
+    <a href="#">
+        <i class="bi bi-cloud-upload"></i>
+        Upload Document
+    </a>
+
+</div>
+
+<!-- WORKFLOW -->
+
+<button class="sidebar-dropdown">
+
+    <i class="bi bi-diagram-3 me-2"></i>
+
+    Workflow
+
+</button>
+
+<div class="sidebar-menu">
+
+    <a href="{% url 'reviews' %}">
+        <i class="bi bi-search"></i>
+        Reviews
+    </a>
+
+    <a href="{% url 'validation' %}">
+        <i class="bi bi-patch-check"></i>
+        Validation
+    </a>
+
+    <a href="{% url 'approvals' %}">
+        <i class="bi bi-check2-square"></i>
+        Approvals
+    </a>
+
+    <a href="#">
+        <i class="bi bi-list-check"></i>
+        My Tasks
+    </a>
+
+</div>
+
+<!-- REPORTS -->
+
+<button class="sidebar-dropdown">
+
+    <i class="bi bi-bar-chart-line-fill me-2"></i>
+
+    Reports
+
+</button>
+
+<div class="sidebar-menu">
+
+    <a href="#">
+        <i class="bi bi-graph-up"></i>
+        Personal Reports
+    </a>
+
+    <a href="#">
+        <i class="bi bi-file-bar-graph"></i>
+        Project Reports
+    </a>
+
+</div>
+
+<!-- MY PROFILE -->
+
+<button class="sidebar-dropdown">
+
+    <i class="bi bi-person-circle me-2"></i>
+
+    My Profile
+
+</button>
+
+<div class="sidebar-menu">
+
+    <a href="#">
+        <i class="bi bi-person"></i>
+        Profile
+    </a>
+
+    <a href="#">
+        <i class="bi bi-file-earmark-person"></i>
+        Documents
+    </a>
+
+    <a href="#">
+        <i class="bi bi-shield-lock"></i>
+        Security
+    </a>
+
+    <a href="#">
+        <i class="bi bi-bell"></i>
+        Notifications
+    </a>
 
 </div>
 
