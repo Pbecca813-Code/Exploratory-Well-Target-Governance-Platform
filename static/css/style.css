@@ -19,7 +19,7 @@ body{
 
 .sidebar{
 
-    background:#0f172a;
+    background:#0F172A;
 
     min-height:100vh;
 
@@ -35,7 +35,13 @@ body{
 
 .sidebar-header{
 
-    padding:30px 20px;
+    background:linear-gradient(
+        180deg,
+        #162233,
+        #0F172A
+    );
+
+    padding:26px 20px;
 
     text-align:center;
 
@@ -45,9 +51,23 @@ body{
 
 .sidebar-header h4{
 
-    color:white;
+    color:#ffffff;
+
+    font-size:22px;
 
     font-weight:700;
+
+    margin-bottom:2px;
+
+}
+
+.sidebar-header small{
+
+    color:#8FB8FF;
+
+    font-size:13px;
+
+    letter-spacing:1px;
 
 }
 
@@ -318,5 +338,314 @@ body{
     font-size:14px;
 
     padding:8px 14px;
+
+}
+
+/* ==========================================
+   SIDEBAR SECTION HEADER
+========================================== */
+
+.sidebar-dropdown{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:transparent;
+
+    color:#ffffff;
+
+    border:none;
+
+    padding:16px 26px;
+
+    text-align:left;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    border-left:4px solid transparent;
+
+}
+
+.sidebar-dropdown:hover{
+
+    background:#1f2d3d;
+
+    border-left:4px solid #D52B1E;
+
+    color:#ffffff;
+
+}
+
+.sidebar-dropdown.active{
+
+    background:#243447;
+
+    border-left:4px solid #D52B1E;
+
+    color:#ffffff;
+
+}
+
+.sidebar-dropdown::before{
+
+    content:"▶";
+
+    font-size:10px;
+
+    transition:.25s;
+
+}
+
+.sidebar-dropdown.active::before{
+
+    transform:rotate(90deg);
+
+}
+/* ==========================================
+   SUB MENU
+========================================== */
+
+.sidebar-menu{
+
+    display:none;
+
+    background:#172233;
+
+    border-left:4px solid rgba(255,255,255,.04);
+
+}
+
+.sidebar-menu.show{
+
+    display:block;
+
+}
+
+.sidebar-menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 48px;
+
+    color:#CBD5E1;
+
+    font-size:14px;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+.sidebar-menu a:hover{
+
+    background:#233247;
+
+    color:#ffffff;
+
+    padding-left:36px;
+
+}
+
+.sidebar-menu a.active{
+
+    background:#223247;
+
+    border-left:4px solid #D52B1E;
+
+    color:#ffffff;
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   SIDEBAR SECTION TITLE
+========================================== */
+
+.sidebar-section-title{
+
+    padding:18px 18px 10px;
+
+    color:#7C8CA5;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    border-top:1px solid rgba(255,255,255,.06);
+
+    border-bottom:1px solid rgba(255,255,255,.03);
+
+    margin-top:12px;
+
+    margin-bottom:8px;
+
+    opacity:.85;
+
+}
+
+/* ==========================================
+   DASHBOARD HOME BUTTON
+========================================== */
+
+.sidebar-home{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:16px 26px;
+
+    color:#E2E8F0;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+.sidebar-home i{
+
+    font-size:18px;
+
+}
+
+.sidebar-home:hover{
+
+    background:#223247;
+
+    border-left:4px solid #D52B1E;
+
+    color:#ffffff;
+
+}
+
+.sidebar-home.active{
+
+    background:#243447;
+
+    border-left:4px solid #D52B1E;
+
+    color:#ffffff;
+
+}
+
+/* ==========================================
+   PAGE CONTENT
+========================================== */
+
+table{
+
+    width:100%;
+
+}
+
+.card{
+
+    margin-bottom:24px;
+
+}
+
+/* ==========================================
+   TOPBAR USER
+========================================== */
+
+.topbar-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.profile-photo{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #D52B1E;
+
+}
+
+.user-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    line-height:1.2;
+
+}
+
+.user-info strong{
+
+    font-size:15px;
+
+    color:#1F2937;
+
+}
+
+.user-info small{
+
+    color:#64748B;
+
+    font-size:12px;
+
+}
+
+.logout-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#D52B1E;
+
+    color:white;
+
+    transition:.25s;
+
+}
+
+.logout-btn:hover{
+
+    background:#B02117;
 
 }

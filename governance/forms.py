@@ -7,6 +7,13 @@ from .models import (
     WellTarget,
     WellTargetDocument,
     AdministratorAccessRequest,
+    Project,
+    Company,
+    Department,
+    BusinessUnit,
+    Country,
+    Region,
+    Basin,
 )
 
 
@@ -228,6 +235,93 @@ class AdministratorAccessRequestForm(forms.ModelForm):
             "profile_photo": forms.FileInput(attrs={
                 "id": "id_profile_photo",
                "class": "upload-input"
+            }),
+
+        }
+
+        # =====================================================
+# PROJECT FORM
+# =====================================================
+
+class ProjectForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Project
+
+        fields = [
+
+            "project_name",
+
+            "description",
+
+            "lead_interpreter",
+
+            "status",
+
+            "start_date",
+
+            "end_date",
+
+        ]
+
+        widgets = {
+
+            "project_name": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Project Name"
+            }),
+
+            "description": forms.Textarea(attrs={
+                "class": "form-control",
+                "rows": 4,
+                "placeholder": "Project Description"
+            }),
+
+            "lead_interpreter": forms.Select(attrs={
+                "class": "form-select"
+            }),
+
+            "status": forms.Select(attrs={
+                "class": "form-select"
+            }),
+
+            "start_date": forms.DateInput(attrs={
+                "type": "date",
+                "class": "form-control"
+            }),
+
+            "end_date": forms.DateInput(attrs={
+                "type": "date",
+                "class": "form-control"
+            }),
+
+        }
+
+        # =====================================================
+# COMPANY FORM
+# =====================================================
+
+class CompanyForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Company
+
+        fields = [
+            "name",
+            "is_active",
+        ]
+
+        widgets = {
+
+            "name": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Company Name"
+            }),
+
+            "is_active": forms.CheckboxInput(attrs={
+                "class": "form-check-input"
             }),
 
         }

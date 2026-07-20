@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2>Master Data</h2>
+
+        <p class="text-muted">
+
+            Manage platform reference data.
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Companies</h5>
+
+                <p>Create and manage companies.</p>
+
+                <a href="{% url 'company_list' %}" class="btn btn-primary">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Departments</h5>
+
+                <p>Create and manage departments.</p>
+
+                <a href="#" class="btn btn-primary">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Business Units</h5>
+
+                <p>Create and manage business units.</p>
+
+                <a href="#" class="btn btn-primary">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Countries</h5>
+
+                <p>Create and manage countries.</p>
+
+                <a href="#" class="btn btn-primary">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Regions</h5>
+
+                <p>Create and manage regions.</p>
+
+                <a href="#" class="btn btn-primary">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h5>Basins</h5>
+
+                <p>Create and manage basins.</p>
+
+                <a href="#" class="btn btn-primary">
+
+                    Open
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

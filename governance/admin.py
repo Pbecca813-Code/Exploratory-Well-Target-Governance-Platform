@@ -6,7 +6,15 @@ from .models import (
     SeismicReview,
     Validation,
     TargetApproval,
-    WellTargetHistory
+    WellTargetHistory,
+    Project,
+    ProjectMember,
+    Company,
+    Department,
+    BusinessUnit,
+    Country,
+    Region,
+    Basin,
 )
 
 admin.site.register(WellTarget)
@@ -15,6 +23,15 @@ admin.site.register(SeismicReview)
 admin.site.register(Validation)
 admin.site.register(TargetApproval)
 admin.site.register(WellTargetHistory)
+admin.site.register(Project)
+admin.site.register(ProjectMember)
+
+admin.site.register(Company)
+admin.site.register(Department)
+admin.site.register(BusinessUnit)
+admin.site.register(Country)
+admin.site.register(Region)
+admin.site.register(Basin)
 
 admin.site.site_header = "Administrator"
 

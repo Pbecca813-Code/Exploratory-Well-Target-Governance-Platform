@@ -18,7 +18,9 @@ from django.contrib.auth.decorators import login_required
 
 from .models import (
     WellTarget,
-    WellTargetDocument
+    WellTargetDocument,
+    Project,
+    Company,
 )
 
 from .forms import (
@@ -26,6 +28,8 @@ from .forms import (
     WellTargetDocumentForm,
     EmployeeCreateForm,
     AdministratorAccessRequestForm,
+    ProjectForm,
+    CompanyForm,
 )
 
 
@@ -505,3 +509,168 @@ def request_admin_access(request):
         }
 
     )
+
+# =====================================================
+# PROJECT MANAGEMENT
+# =====================================================
+
+@login_required
+def project_management(request):
+
+    if request.method == "POST":
+
+        form = ProjectForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Project created successfully."
+            )
+
+            return redirect("project_management")
+
+    else:
+
+        form = ProjectForm()
+
+    projects = Project.objects.all().order_by("-created_at")
+
+    context = {
+
+        "form": form,
+
+        "projects": projects,
+
+    }
+
+    return render(
+
+        request,
+
+        "project_management.html",
+
+        context,
+
+    )
+
+# =====================================================
+# MASTER DATA
+# =====================================================
+
+@login_required
+def master_data(request):
+
+    return render(
+        request,
+        "master_data.html"
+    )
+
+# =====================================================
+# COMPANY MANAGEMENT
+# =====================================================
+
+@login_required
+def company_list(request):
+
+    companies = Company.objects.all().order_by("name")
+
+    return render(
+        request,
+        "companies/company_list.html",
+        {
+            "companies": companies,
+        },
+    )
+
+
+@login_required
+def company_create(request):
+
+    if request.method == "POST":
+
+        form = CompanyForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Company created successfully."
+            )
+
+            return redirect("company_list")
+
+    else:
+
+        form = CompanyForm()
+
+    return render(
+        request,
+        "companies/company_form.html",
+        {
+            "form": form,
+            "title": "Create Company",
+        },
+    )
+
+
+@login_required
+def company_edit(request, pk):
+
+    company = get_object_or_404(
+        Company,
+        pk=pk
+    )
+
+    if request.method == "POST":
+
+        form = CompanyForm(
+            request.POST,
+            instance=company
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Company updated successfully."
+            )
+
+            return redirect("company_list")
+
+    else:
+
+        form = CompanyForm(instance=company)
+
+    return render(
+        request,
+        "companies/company_form.html",
+        {
+            "form": form,
+            "title": "Edit Company",
+        },
+    )
+
+
+@login_required
+def company_delete(request, pk):
+
+    company = get_object_or_404(
+        Company,
+        pk=pk
+    )
+
+    company.delete()
+
+    messages.success(
+        request,
+        "Company deleted successfully."
+    )
+
+    return redirect("company_list")

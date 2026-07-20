@@ -1,18 +1,16 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>
-Exploratory Well Target Governance Platform
-</title>
+<title>Exploratory Well Target Governance Platform</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -30,141 +28,361 @@ href="{% static 'css/style.css' %}">
 
 <div class="row">
 
-<!-- SIDEBAR -->
+<!-- ===========================
+     SIDEBAR
+============================ -->
 
-<div class="col-md-2 sidebar p-0">
+<div class="col-md-3 col-lg-2 sidebar p-0">
 
     <div class="sidebar-header">
 
         <h4 class="text-white mb-0">
-
-            Well Target
-
+            WellTarget
         </h4>
 
-        <strong>
-
-            Governance
-
-        </strong>
+        <small class="text-light">
+            Governance Platform
+        </small>
 
     </div>
 
-    <a href="{% url 'home' %}">
+    <a href="{% url 'home' %}" class="sidebar-home">
         <i class="bi bi-speedometer2"></i>
         Dashboard
     </a>
 
-    <a href="{% url 'well_targets' %}">
-        <i class="bi bi-bullseye"></i>
-        Well Targets
-    </a>
+{% if request.user.is_superuser %}
 
-    <a href="{% url 'new_target' %}">
-        <i class="bi bi-plus-circle"></i>
-        New Target
-    </a>
-
-    <a href="{% url 'documents' %}">
-        <i class="bi bi-folder2-open"></i>
-        Documents
-    </a>
-
-    <a href="{% url 'reviews' %}">
-        <i class="bi bi-search"></i>
-        Reviews
-    </a>
-
-    <a href="{% url 'validation' %}">
-        <i class="bi bi-patch-check"></i>
-        Validation
-    </a>
-
-    <a href="{% url 'approvals' %}">
-        <i class="bi bi-check2-square"></i>
-        Approvals
-    </a>
-
-    <a href="{% url 'audit_trail' %}">
-        <i class="bi bi-clock-history"></i>
-        Audit Trail
-    </a>
-
-    <a href="{% url 'reports' %}">
-        <i class="bi bi-bar-chart-line"></i>
-        Reports
-    </a>
-
-    {% if request.user.is_superuser %}
-
-    <hr class="text-light">
-
-    <div class="px-3 text-white-50 small fw-bold mt-2 mb-2">
-        ADMINISTRATION
-    </div>
-
-    <a href="{% url 'user_management' %}">
-        <i class="bi bi-people"></i>
-        User Management
-    </a>
-
-    <a href="#">
-        <i class="bi bi-diagram-3"></i>
-        Master Data
-    </a>
-
-    {% endif %}
-
+<div class="sidebar-section-title">
+    SYSTEM ADMINISTRATION
 </div>
 
-<!-- MAIN -->
+<!-- EMPLOYEE MANAGEMENT -->
 
-<div class="col-md-10 p-0">
+<button class="sidebar-dropdown">
 
-<div class="topbar">
+<i class="bi bi-people-fill me-2"></i>
 
-<div class="d-flex justify-content-between">
-
-<div>
-
-<strong>
-
-Exploratory Well Target Governance Platform
-
-</strong>
-
-</div>
-
-<div>
-
-Welcome,
-
-<strong>
-
-{{ request.user.username }}
-
-</strong>
-
-|
-
-<form method="post"
-      action="{% url 'logout' %}"
-      style="display:inline;">
-
-{% csrf_token %}
-
-<button
-type="submit"
-style="background:none;
-border:none;
-color:#0d6efd;
-cursor:pointer;">
-
-Logout
+Employee Management
 
 </button>
 
-</form>
+<div class="sidebar-menu">
+
+<a href="{% url 'user_management' %}">
+<i class="bi bi-person-badge"></i>
+Employees
+</a>
+
+<a href="#">
+<i class="bi bi-person-workspace"></i>
+Roles
+</a>
+
+<a href="#">
+<i class="bi bi-diagram-3"></i>
+Workspace Assignment
+</a>
+
+<a href="#">
+<i class="bi bi-person-lines-fill"></i>
+User Requests
+</a>
+
+</div>
+
+<!-- PROJECT MANAGEMENT -->
+
+<button class="sidebar-dropdown">
+
+<i class="bi bi-kanban-fill me-2"></i>
+
+Project Management
+
+</button>
+
+<div class="sidebar-menu">
+
+<a href="{% url 'project_management' %}">
+<i class="bi bi-kanban"></i>
+Projects
+</a>
+
+<a href="#">
+<i class="bi bi-people"></i>
+Teams
+</a>
+
+<a href="{% url 'well_targets' %}">
+<i class="bi bi-bullseye"></i>
+Well Targets
+</a>
+
+<a href="{% url 'documents' %}">
+<i class="bi bi-file-earmark-text"></i>
+Documents
+</a>
+
+</div>
+
+<!-- MASTER DATA -->
+
+<button class="sidebar-dropdown">
+
+<i class="bi bi-diagram-3-fill me-2"></i>
+
+Master Data
+
+</button>
+
+<div class="sidebar-menu">
+
+<a href="{% url 'company_list' %}">
+<i class="bi bi-building"></i>
+Companies
+</a>
+
+<a href="#">
+<i class="bi bi-diagram-2"></i>
+Departments
+</a>
+
+<a href="#">
+<i class="bi bi-briefcase"></i>
+Business Units
+</a>
+
+<a href="#">
+<i class="bi bi-globe-americas"></i>
+Countries
+</a>
+
+<a href="#">
+<i class="bi bi-map"></i>
+Regions
+</a>
+
+<a href="#">
+<i class="bi bi-geo-alt"></i>
+Basins
+</a>
+
+</div>
+
+<!-- WORKFLOW -->
+
+<button class="sidebar-dropdown">
+
+<i class="bi bi-diagram-2-fill me-2"></i>
+
+Workflow
+
+</button>
+
+<div class="sidebar-menu">
+
+<a href="{% url 'reviews' %}">
+<i class="bi bi-search"></i>
+Reviews
+</a>
+
+<a href="{% url 'validation' %}">
+<i class="bi bi-patch-check"></i>
+Validation
+</a>
+
+<a href="{% url 'approvals' %}">
+<i class="bi bi-check2-square"></i>
+Approvals
+</a>
+
+<a href="{% url 'audit_trail' %}">
+<i class="bi bi-clock-history"></i>
+Audit Trail
+</a>
+
+</div>
+
+<!-- REPORTING -->
+
+<button class="sidebar-dropdown">
+
+<i class="bi bi-bar-chart-line-fill me-2"></i>
+
+Reporting
+
+</button>
+
+<div class="sidebar-menu">
+
+<a href="{% url 'reports' %}">
+<i class="bi bi-bar-chart-line"></i>
+Reports
+</a>
+
+</div>
+
+<!-- PLATFORM SETTINGS -->
+
+<button class="sidebar-dropdown">
+
+<i class="bi bi-gear-wide-connected me-2"></i>
+
+Platform Settings
+
+</button>
+
+<div class="sidebar-menu">
+
+<a href="#">
+<i class="bi bi-shield-lock"></i>
+Security
+</a>
+
+<a href="#">
+<i class="bi bi-envelope-gear"></i>
+Email Settings
+</a>
+
+<a href="#">
+<i class="bi bi-gear"></i>
+System Settings
+</a>
+
+</div>
+
+{% else %}
+
+<div class="sidebar-workspace">
+
+USER WORKSPACE
+
+</div>
+
+<button class="sidebar-dropdown">
+
+<i class="bi bi-person-workspace me-2"></i>
+
+My Workspace
+
+</button>
+
+<div class="sidebar-menu">
+
+<a href="{% url 'well_targets' %}">
+<i class="bi bi-bullseye"></i>
+Well Targets
+</a>
+
+<a href="{% url 'documents' %}">
+<i class="bi bi-file-earmark-text"></i>
+Documents
+</a>
+
+<a href="{% url 'reviews' %}">
+<i class="bi bi-search"></i>
+Reviews
+</a>
+
+<a href="{% url 'validation' %}">
+<i class="bi bi-patch-check"></i>
+Validation
+</a>
+
+<a href="{% url 'approvals' %}">
+<i class="bi bi-check2-square"></i>
+Approvals
+</a>
+
+<a href="{% url 'reports' %}">
+<i class="bi bi-bar-chart-line"></i>
+Reports
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+
+<!-- ===========================
+     MAIN CONTENT
+=========================== -->
+
+<div class="col-md-9 col-lg-10 p-0">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar shadow-sm">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h5 class="mb-0 fw-bold">
+
+                    Exploratory Well Target Governance Platform
+
+                </h5>
+
+                <small class="text-muted">
+
+                    Digital Well Target Governance & Workflow Management
+
+                </small>
+
+            </div>
+
+            <div class="topbar-user">
+
+    <img
+        src="{% static 'images/default_profile.png' %}"
+        class="profile-photo"
+        alt="Profile">
+
+    <div class="user-info">
+
+        <strong>
+            {{ request.user.get_full_name|default:request.user.username }}
+        </strong>
+
+        <small>Administrator</small>
+
+    </div>
+
+    <form
+        method="post"
+        action="{% url 'logout' %}"
+        class="mb-0">
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="logout-btn">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+        </button>
+
+    </form>
+
+</div>
+
+        </div>
+
+    </div>
+
+    <!-- PAGE CONTENT -->
+
+    <div class="container-fluid mt-4">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
 
 </div>
 
@@ -172,18 +390,7 @@ Logout
 
 </div>
 
-<div class="p-4">
-
-{% block content %}
-{% endblock %}
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+<script src="{% static 'js/sidebar.js' %}"></script>
 
 </body>
 

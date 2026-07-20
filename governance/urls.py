@@ -12,9 +12,9 @@ urlpatterns = [
     path("register/", views.register, name="register"),
 
     path(
-    'well-targets/',
-    views.well_targets,
-    name='well_targets'
+        'well-targets/',
+        views.well_targets,
+        name='well_targets'
     ),
 
     path(
@@ -24,21 +24,21 @@ urlpatterns = [
     ),
 
     path(
-    'upload-document/',
-    views.upload_document,
-    name='upload_document'
+        'upload-document/',
+        views.upload_document,
+        name='upload_document'
    ),
     
     path(
-    'documents/download/<int:document_id>/',
-    views.download_document,
-    name='download_document'
+        'documents/download/<int:document_id>/',
+        views.download_document,
+        name='download_document'
    ),
    
     path(
-    'documents/delete/<int:document_id>/',
-    views.delete_document,
-    name='delete_document'
+        'documents/delete/<int:document_id>/',
+        views.delete_document,
+        name='delete_document'
    ),
 
     path(
@@ -48,9 +48,9 @@ urlpatterns = [
     ),
 
     path(
-    'documents/view/<int:document_id>/',
-    views.view_document,
-    name='view_document'
+        'documents/view/<int:document_id>/',
+        views.view_document,
+        name='view_document'
    ),
 
     path(
@@ -78,50 +78,86 @@ urlpatterns = [
     ),
 
     path(
-    'reports/',
-    views.reports,
-    name='reports'
+        'reports/',
+        views.reports,
+        name='reports'
+    ),
+
+    path(
+        'project-management/',
+        views.project_management,
+        name='project_management'
+    ),
+
+    path(
+        'administration/users/',
+        views.user_management,
+        name='user_management'
+    ),
+
+    path(
+        'administration/users/create/',
+        views.create_employee,
+        name='create_employee'
+    ),
+
+    path(
+        "user-login/",
+        views.user_login,
+        name="user_login",
+    ),
+
+    path(
+        "admin-login/",
+        views.admin_login,
+        name="admin_login",
+    ),
+
+    path(
+        "forgot-password/",
+        views.forgot_password,
+        name="forgot_password",
+    ),
+
+    path(
+        "forgot-username/",
+        views.forgot_username,
+        name="forgot_username",
+    ),
+
+    path(
+        "request-admin-access/",
+        views.request_admin_access,
+        name="request_admin_access",
+    ),
+
+    path(
+        "master-data/",
+        views.master_data,
+        name="master_data",
+    ),
+
+    path(
+    "companies/",
+    views.company_list,
+    name="company_list",
 ),
 
 path(
-    'administration/users/',
-    views.user_management,
-    name='user_management'
+    "companies/new/",
+    views.company_create,
+    name="company_create",
 ),
 
 path(
-    'administration/users/create/',
-    views.create_employee,
-    name='create_employee'
+    "companies/<int:pk>/edit/",
+    views.company_edit,
+    name="company_edit",
 ),
 
 path(
-    "user-login/",
-    views.user_login,
-    name="user_login",
-),
-
-path(
-    "admin-login/",
-    views.admin_login,
-    name="admin_login",
-),
-
-path(
-    "forgot-password/",
-    views.forgot_password,
-    name="forgot_password",
-),
-
-path(
-    "forgot-username/",
-    views.forgot_username,
-    name="forgot_username",
-),
-
-path(
-    "request-admin-access/",
-    views.request_admin_access,
-    name="request_admin_access",
+    "companies/<int:pk>/delete/",
+    views.company_delete,
+    name="company_delete",
 ),
 ]
