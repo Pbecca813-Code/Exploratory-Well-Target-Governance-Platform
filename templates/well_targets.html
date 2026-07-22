@@ -3,125 +3,150 @@
 {% block content %}
 
 <h2 class="fw-bold">
-
-🎯 Well Target Management
-
+    🎯 Well Target Management
 </h2>
 
 <p class="text-muted">
-
-Create, manage and monitor exploratory well targets.
-
+    Create, manage and monitor exploratory well targets.
 </p>
 
 <div class="d-flex justify-content-between mb-3">
 
-    <a href="{% url 'new_target' %}"
-       class="btn btn-danger">
-
+    <a href="{% url 'new_target' %}" class="btn btn-danger">
         + New Well Target
-
     </a>
 
-<div class="input-group" style="width:320px;">
+    <div class="input-group" style="width:320px;">
 
-    <span class="input-group-text">
+        <span class="input-group-text">
+            <i class="bi bi-search"></i>
+        </span>
 
-        <i class="bi bi-search"></i>
+        <input
+            type="text"
+            class="form-control"
+            placeholder="Search Well Targets">
 
-    </span>
-
-    <input
-        type="text"
-        class="form-control"
-        placeholder="Search Well Targets">
-
-</div>
+    </div>
 
 </div>
 
 <div class="card shadow-sm">
 
-<div class="card-body">
+    <div class="card-body">
 
-<table class="table table-hover align-middle">
+        <table class="table table-hover align-middle">
 
-<thead>
+            <thead>
 
-<tr>
+                <tr>
 
-<th>Target</th>
+                    <th>Target</th>
 
-<th>Basin</th>
+                    <th>Basin</th>
 
-<th>Status</th>
+                    <th>Status</th>
 
-<th>Lead Interpreter</th>
+                    <th>Lead Interpreter</th>
 
-<th>Actions</th>
+                    <th>Actions</th>
 
-</tr>
+                </tr>
 
-</thead>
+            </thead>
 
-<tbody>
+            <tbody>
 
-{% for target in targets %}
+                {% for target in targets %}
 
-<tr>
+                <tr>
 
-<td>{{ target.target_name }}</td>
+                    <td>{{ target.target_name }}</td>
 
-<td>{{ target.basin }}</td>
+                    <td>{{ target.basin }}</td>
 
-<td>
+                    <td>
 
-{% if target.status == 'APPROVED' %}
+                        {% if target.status == 'APPROVED' %}
 
-<span class="badge bg-success">
-    Approved
-</span>
+                            <span class="badge bg-success">Approved</span>
 
-{% elif target.status == 'UNDER_REVIEW' %}
+                        {% elif target.status == 'UNDER_REVIEW' %}
 
-<span class="badge bg-warning text-dark">
-    Under Review
-</span>
+                            <span class="badge bg-warning text-dark">Under Review</span>
 
-{% elif target.status == 'VALIDATED' %}
+                        {% elif target.status == 'VALIDATED' %}
 
-<span class="badge bg-info">
-    Validated
-</span>
+                            <span class="badge bg-info">Validated</span>
 
-{% elif target.status == 'PENDING_APPROVAL' %}
+                        {% elif target.status == 'PENDING_APPROVAL' %}
 
-<span class="badge bg-primary">
-    Pending Approval
-</span>
+                            <span class="badge bg-primary">Pending Approval</span>
 
-{% elif target.status == 'REJECTED' %}
+                        {% elif target.status == 'REJECTED' %}
 
-<span class="badge bg-danger">
-    Rejected
-</span>
+                            <span class="badge bg-danger">Rejected</span>
 
-{% else %}
+                        {% else %}
 
-<span class="badge bg-secondary">
-    Draft
-</span>
+                            <span class="badge bg-secondary">Draft</span>
 
-{% endif %}
+                        {% endif %}
 
-</td>
+                    </td>
 
-</tr>
+                    <td>{{ target.lead_interpreter }}</td>
 
-{% endfor %}
+                    <td>
 
-</tbody>
+                        <a
+                            href="{% url 'well_target_detail' target.id %}"
+                            class="btn btn-outline-primary btn-sm">
 
-</table>
+                            <i class="bi bi-eye"></i>
+
+                        </a>
+
+                        <a
+                            href="{% url 'well_target_edit' target.id %}"
+                            class="btn btn-outline-success btn-sm">
+
+                            <i class="bi bi-pencil"></i>
+
+                        </a>
+
+                        <a
+                            href="{% url 'well_target_delete' target.id %}"
+                            class="btn btn-outline-danger btn-sm">
+
+                            <i class="bi bi-trash"></i>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5" class="text-center">
+
+                        No Well Targets found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
 
 {% endblock %}

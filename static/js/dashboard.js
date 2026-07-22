@@ -1,67 +1,144 @@
 const statusCanvas = document.getElementById("statusChart");
 const documentCanvas = document.getElementById("documentChart");
 
+/* ==============================
+   TARGET STATUS CHART
+============================== */
+
 if (statusCanvas) {
+
+    const draft = Number(statusCanvas.dataset.draft);
+    const review = Number(statusCanvas.dataset.review);
+    const validated = Number(statusCanvas.dataset.validated);
+    const approved = Number(statusCanvas.dataset.approved);
+
     new Chart(statusCanvas, {
+
         type: "doughnut",
+
         data: {
+
             labels: [
                 "Draft",
                 "Review",
                 "Validated",
                 "Approved"
             ],
+
             datasets: [{
-                data: [0, 0, 0, 0],
+
+                data: [
+                    draft,
+                    review,
+                    validated,
+                    approved
+                ],
+
                 backgroundColor: [
                     "#2563EB",
                     "#F59E0B",
                     "#10B981",
                     "#8B5CF6"
-                ]
+                ],
+
+                borderWidth: 2
+
             }]
+
         },
+
         options: {
+
             responsive: true,
-            aspectRatio: 2,
+
+            maintainAspectRatio: false,
+
             plugins: {
+
                 legend: {
+
                     position: "bottom"
+
                 }
+
             }
+
         }
+
     });
+
 }
 
+/* ==============================
+   DOCUMENT CHART
+============================== */
+
 if (documentCanvas) {
+
+    const documents = Number(documentCanvas.dataset.documents);
+
     new Chart(documentCanvas, {
-        type: "line",
+
+        type: "bar",
+
         data: {
+
             labels: [
-                "Jan",
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun"
+
+                "Uploaded Documents"
+
             ],
+
             datasets: [{
+
                 label: "Documents",
-                data: [0, 0, 0, 0, 0, 0],
-                borderColor: "#2563EB",
-                backgroundColor: "rgba(37,99,235,0.15)",
-                fill: true,
-                tension: 0.35
+
+                data: [
+
+                    documents
+
+                ],
+
+                backgroundColor: "#2563EB"
+
             }]
+
         },
+
         options: {
+
             responsive: true,
-            aspectRatio: 2,
+
+            maintainAspectRatio: false,
+
             scales: {
+
                 y: {
-                    beginAtZero: true
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        precision: 0
+
+                    }
+
                 }
+
+            },
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                }
+
             }
+
         }
+
     });
+
 }

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-lg border-0">
+
+    <div class="card-header bg-success text-white">
+
+        <h3>
+
+            Edit Team Member
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Employee
+
+                </label>
+
+                {{ form.employee }}
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Project Role
+
+                </label>
+
+                {{ form.role }}
+
+            </div>
+
+            <a
+                href="{% url 'project_team' member.project.id %}"
+                class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+            <button
+                class="btn btn-success">
+
+                Save Changes
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -20,7 +20,11 @@ from .models import (
     WellTarget,
     WellTargetDocument,
     Project,
+    ProjectTeam,
     Company,
+    SeismicReview,
+    Validation,
+    TargetApproval,
 )
 
 from .forms import (
@@ -29,6 +33,7 @@ from .forms import (
     EmployeeCreateForm,
     AdministratorAccessRequestForm,
     ProjectForm,
+    ProjectTeamForm,
     CompanyForm,
 )
 
@@ -43,65 +48,272 @@ def home(request):
     if groups.exists():
         role = groups.first().name
 
+    # ==========================================
+    # DASHBOARD DATA
+    # ==========================================
+
     targets = WellTarget.objects.all()
 
-    documents = WellTargetDocument.objects.all().order_by('-upload_date')[:5]
+    documents = WellTargetDocument.objects.all().order_by("-upload_date")[:5]
+
+    # ==========================================
+    # KPI COUNTS
+    # ==========================================
+
+    employee_count = User.objects.count()
+
+    company_count = Company.objects.count()
+
+    project_count = Project.objects.count()
+
+    planning_projects = Project.objects.filter(
+    status="PLANNING"
+    ).count()
+
+    active_projects = Project.objects.filter(
+    status="ACTIVE"
+    ).count()
+
+    on_hold_projects = Project.objects.filter(
+    status="ON_HOLD"
+    ).count()
+
+    completed_projects = Project.objects.filter(
+    status="COMPLETED"
+    ).count()
+
+    archived_projects = Project.objects.filter(
+    status="ARCHIVED"
+    ).count()
+
+    well_target_count = WellTarget.objects.count()
 
     document_count = WellTargetDocument.objects.count()
 
-    draft_count = WellTarget.objects.filter(status='DRAFT').count()
+    review_count = SeismicReview.objects.count()
 
-    review_count = WellTarget.objects.filter(
-        status='UNDER_REVIEW'
+    validation_count = Validation.objects.count()
+
+    approval_count = TargetApproval.objects.count()
+
+    # ==========================================
+    # WELL TARGET STATUS
+    # ==========================================
+
+    draft_count = WellTarget.objects.filter(
+        status="DRAFT"
+    ).count()
+
+    under_review_count = WellTarget.objects.filter(
+        status="UNDER_REVIEW"
     ).count()
 
     validated_count = WellTarget.objects.filter(
-        status='VALIDATED'
+        status="VALIDATED"
     ).count()
 
     approved_count = WellTarget.objects.filter(
-        status='APPROVED'
+        status="APPROVED"
     ).count()
+
+    # ==========================================
+    # CONTEXT
+    # ==========================================
 
     context = {
 
-        'role': role,
+        "role": role,
 
-        'targets': targets,
+        "targets": targets,
 
-        'documents': documents,
+        "documents": documents,
 
-        'document_count': document_count, 
-        
-        'draft_count': draft_count,
+        # Enterprise KPIs
+        "employee_count": employee_count,
 
-        'review_count': review_count,
+        "company_count": company_count,
 
-        'validated_count': validated_count,
+        "project_count": project_count,
 
-        'approved_count': approved_count,
+        "planning_projects": planning_projects,
+
+        "active_projects": active_projects,
+
+        "on_hold_projects": on_hold_projects,
+
+        "completed_projects": completed_projects,
+
+        "archived_projects": archived_projects,
+
+        "well_target_count": well_target_count,
+
+        "document_count": document_count,
+
+        "review_count": review_count,
+
+        "validation_count": validation_count,
+
+        "approval_count": approval_count,
+
+        # Workflow Status
+        "draft_count": draft_count,
+
+        "under_review_count": under_review_count,
+
+        "validated_count": validated_count,
+
+        "approved_count": approved_count,
 
     }
 
     return render(
         request,
-        'dashboard.html',
-        context
+        "dashboard.html",
+        context,
     )
+
+# =====================================================
+# WELL TARGET MANAGEMENT
+# =====================================================
 
 @login_required
 def well_targets(request):
 
     targets = WellTarget.objects.all()
 
+    status = request.GET.get("status")
+
+    if status:
+
+        targets = targets.filter(
+            status=status
+        )
+
+    search = request.GET.get("search")
+
+    if search:
+
+        targets = targets.filter(
+            target_name__icontains=search
+        )
+
+    return render(
+
+        request,
+
+        "well_targets.html",
+
+        {
+
+            "targets": targets,
+
+            "selected_status": status,
+
+            "search": search,
+
+        },
+
+    )
+
+# =====================================================
+# WELL TARGET DETAIL
+# =====================================================
+
+@login_required
+def well_target_detail(request, pk):
+
+    target = get_object_or_404(
+        WellTarget,
+        pk=pk
+    )
+
     return render(
         request,
-        'well_targets.html',
+        "well_target_detail.html",
         {
-            'targets': targets
+            "target": target,
         }
     )
 
+# =====================================================
+# EDIT WELL TARGET
+# =====================================================
+
+@login_required
+def well_target_edit(request, pk):
+
+    target = get_object_or_404(
+        WellTarget,
+        pk=pk
+    )
+
+    if request.method == "POST":
+
+        form = WellTargetForm(
+            request.POST,
+            instance=target
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Well Target updated successfully."
+            )
+
+            return redirect(
+                "well_targets"
+            )
+
+    else:
+
+        form = WellTargetForm(
+            instance=target
+        )
+
+    return render(
+        request,
+        "well_target_edit.html",
+        {
+            "form": form,
+            "target": target,
+        }
+    )
+
+# =====================================================
+# DELETE WELL TARGET
+# =====================================================
+
+@login_required
+def well_target_delete(request, pk):
+
+    target = get_object_or_404(
+        WellTarget,
+        pk=pk
+    )
+
+    if request.method == "POST":
+
+        target.delete()
+
+        messages.success(
+            request,
+            "Well Target deleted successfully."
+        )
+
+        return redirect(
+            "well_targets"
+        )
+
+    return render(
+        request,
+        "well_target_delete.html",
+        {
+            "target": target,
+        }
+    )
 
 @login_required
 def new_target(request):
@@ -553,6 +765,267 @@ def project_management(request):
         "project_management.html",
 
         context,
+
+    )
+
+# =====================================================
+# PROJECT DETAILS
+# =====================================================
+
+@login_required
+def project_detail(request, pk):
+
+    project = get_object_or_404(
+        Project,
+        pk=pk
+    )
+
+    context = {
+
+        "project": project,
+
+    }
+
+    return render(
+
+        request,
+
+        "project_detail.html",
+
+        context,
+
+    )
+
+# =====================================================
+# PROJECT TEAM
+# =====================================================
+
+@login_required
+def project_team(request, pk):
+
+    project = get_object_or_404(Project, pk=pk)
+
+    if request.method == "POST":
+
+        form = ProjectTeamForm(request.POST)
+
+        if form.is_valid():
+
+            assignment = form.save(commit=False)
+
+            assignment.project = project
+
+            assignment.assigned_by = request.user
+
+            if ProjectTeam.objects.filter(
+                project=project,
+                employee=assignment.employee
+            ).exists():
+
+                messages.warning(
+                    request,
+                    "This employee is already assigned."
+                )
+
+            else:
+
+                assignment.save()
+
+                messages.success(
+                    request,
+                    "Team member assigned successfully."
+                )
+
+            return redirect(
+                "project_team",
+                pk=project.pk
+            )
+
+        else:
+
+            print(form.errors)
+
+    else:
+
+        form = ProjectTeamForm()
+
+    members = project.team_members.select_related("employee")
+
+    return render(
+        request,
+        "project_team.html",
+        {
+            "project": project,
+            "form": form,
+            "members": members,
+        }
+    )
+
+# =====================================================
+# EDIT PROJECT TEAM MEMBER
+# =====================================================
+
+@login_required
+def project_team_edit(request, pk):
+
+    member = get_object_or_404(ProjectTeam, pk=pk)
+
+    if request.method == "POST":
+
+        form = ProjectTeamForm(
+            request.POST,
+            instance=member
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Team member updated successfully."
+            )
+
+            return redirect(
+                "project_team",
+                pk=member.project.id
+            )
+
+    else:
+
+        form = ProjectTeamForm(instance=member)
+
+    return render(
+        request,
+        "project_team_edit.html",
+        {
+            "form": form,
+            "member": member,
+        },
+    )
+
+# =====================================================
+# DELETE PROJECT TEAM MEMBER
+# =====================================================
+
+@login_required
+def project_team_delete(request, pk):
+
+    member = get_object_or_404(ProjectTeam, pk=pk)
+
+    project_id = member.project.id
+
+    if request.method == "POST":
+
+        member.delete()
+
+        messages.success(
+            request,
+            "Team member removed successfully."
+        )
+
+        return redirect(
+            "project_team",
+            pk=project_id
+        )
+
+    return render(
+        request,
+        "project_team_delete.html",
+        {
+            "member": member,
+        },
+    )
+
+# =====================================================
+# EDIT PROJECT
+# =====================================================
+
+@login_required
+def project_edit(request, pk):
+
+    project = get_object_or_404(
+        Project,
+        pk=pk
+    )
+
+    if request.method == "POST":
+
+        form = ProjectForm(
+            request.POST,
+            instance=project
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Project updated successfully."
+            )
+
+            return redirect("project_management")
+
+    else:
+
+        form = ProjectForm(instance=project)
+
+    context = {
+
+        "form": form,
+
+        "project": project,
+
+    }
+
+    return render(
+
+        request,
+
+        "project_edit.html",
+
+        context,
+
+    )
+
+# =====================================================
+# DELETE PROJECT
+# =====================================================
+
+@login_required
+def project_delete(request, pk):
+
+    project = get_object_or_404(
+        Project,
+        pk=pk
+    )
+
+    if request.method == "POST":
+
+        project.delete()
+
+        messages.success(
+
+            request,
+
+            "Project deleted successfully."
+
+        )
+
+        return redirect("project_management")
+
+    return render(
+
+        request,
+
+        "project_delete.html",
+
+        {
+
+            "project": project
+
+        }
 
     )
 

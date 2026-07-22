@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2 class="fw-bold">
+
+            🎯 Well Target Details
+
+        </h2>
+
+        <p class="text-muted">
+
+            View well target information.
+
+        </p>
+
+    </div>
+
+    <div>
+
+        <a
+            href="{% url 'well_target_edit' target.id %}"
+            class="btn btn-success">
+
+            <i class="bi bi-pencil"></i>
+
+            Edit
+
+        </a>
+
+        <a
+            href="{% url 'well_target_delete' target.id %}"
+            class="btn btn-danger">
+
+            <i class="bi bi-trash"></i>
+
+            Delete
+
+        </a>
+
+        <a
+            href="{% url 'well_targets' %}"
+            class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-body">
+
+        <table class="table">
+
+            <tr>
+
+                <th width="250">
+
+                    Well Target Name
+
+                </th>
+
+                <td>
+
+                    {{ target.target_name }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Basin
+
+                </th>
+
+                <td>
+
+                    {{ target.basin }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Status
+
+                </th>
+
+                <td>
+
+                    {{ target.get_status_display }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Lead Interpreter
+
+                </th>
+
+                <td>
+
+                    {{ target.lead_interpreter }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Created
+
+                </th>
+
+                <td>
+
+                    {{ target.created_at }}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

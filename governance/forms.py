@@ -8,6 +8,7 @@ from .models import (
     WellTargetDocument,
     AdministratorAccessRequest,
     Project,
+    ProjectTeam,
     Company,
     Department,
     BusinessUnit,
@@ -295,6 +296,48 @@ class ProjectForm(forms.ModelForm):
                 "type": "date",
                 "class": "form-control"
             }),
+
+        }
+
+        # =====================================================
+# PROJECT TEAM FORM
+# =====================================================
+
+class ProjectTeamForm(forms.ModelForm):
+
+    class Meta:
+
+        model = ProjectTeam
+
+        fields = [
+
+            "employee",
+
+            "role",
+
+        ]
+
+        widgets = {
+
+            "employee": forms.Select(
+
+                attrs={
+
+                    "class": "form-select",
+
+                }
+
+            ),
+
+            "role": forms.Select(
+
+                attrs={
+
+                    "class": "form-select",
+
+                }
+
+            ),
 
         }
 

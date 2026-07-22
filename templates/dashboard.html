@@ -42,44 +42,122 @@
 
     </div>
 
-</div>
-
 <div class="row">
 
     <div class="col-md-3">
-        <div class="card text-center shadow-sm">
-            <div class="card-body">
-                <h5>Draft</h5>
-                <h2>{{ draft_count }}</h2>
+
+        <a href="{% url 'well_targets' %}?status=DRAFT"
+           class="text-decoration-none">
+
+            <div class="card text-center shadow-sm dashboard-card">
+
+                <div class="card-body">
+
+                    <h5 class="text-dark">
+
+                        Draft
+
+                    </h5>
+
+                    <h2 class="fw-bold text-primary">
+
+                        {{ draft_count }}
+
+                    </h2>
+
+                </div>
+
             </div>
-        </div>
+
+        </a>
+
     </div>
 
     <div class="col-md-3">
-        <div class="card text-center shadow-sm">
-            <div class="card-body">
-                <h5>Review</h5>
-                <h2>{{ review_count }}</h2>
+
+        <a href="{% url 'well_targets' %}?status=UNDER_REVIEW"
+           class="text-decoration-none">
+
+            <div class="card text-center shadow-sm dashboard-card">
+
+                <div class="card-body">
+
+                    <h5 class="text-dark">
+
+                        Review
+
+                    </h5>
+
+                    <h2 class="fw-bold text-warning">
+
+                        {{ review_count }}
+
+                    </h2>
+
+                </div>
+
             </div>
-        </div>
+
+        </a>
+
     </div>
 
     <div class="col-md-3">
-        <div class="card text-center shadow-sm">
-            <div class="card-body">
-                <h5>Validated</h5>
-                <h2>{{ validated_count }}</h2>
+
+        <a href="{% url 'well_targets' %}?status=VALIDATED"
+           class="text-decoration-none">
+
+            <div class="card text-center shadow-sm dashboard-card">
+
+                <div class="card-body">
+
+                    <h5 class="text-dark">
+
+                        Validated
+
+                    </h5>
+
+                    <h2 class="fw-bold text-info">
+
+                        {{ validated_count }}
+
+                    </h2>
+
+                </div>
+
             </div>
-        </div>
+
+        </a>
+
     </div>
 
     <div class="col-md-3">
-        <div class="card text-center shadow-sm">
-            <div class="card-body">
-                <h5>Approved</h5>
-                <h2>{{ approved_count }}</h2>
+
+        <a href="{% url 'well_targets' %}?status=APPROVED"
+           class="text-decoration-none">
+
+            <div class="card text-center shadow-sm dashboard-card">
+
+                <div class="card-body">
+
+                    <h5 class="text-dark">
+
+                        Approved
+
+                    </h5>
+
+                    <h2 class="fw-bold text-success">
+
+                        {{ approved_count }}
+
+                    </h2>
+
+                </div>
+
             </div>
-        </div>
+
+        </a>
+
     </div>
 
 </div>
@@ -100,9 +178,15 @@
 
                 <div class="chart-container">
 
-                    <canvas id="statusChart"></canvas>
+<canvas
+    id="statusChart"
+    data-draft="{{ draft_count }}"
+    data-review="{{ review_count }}"
+    data-validated="{{ validated_count }}"
+    data-approved="{{ approved_count }}">
+</canvas>
 
-                </div>
+</div>
 
             </div>
 
@@ -124,9 +208,12 @@
 
                 <div class="chart-container">
 
-                    <canvas id="documentChart"></canvas>
+<canvas
+    id="documentChart"
+    data-documents="{{ document_count }}">
+</canvas>
 
-                </div>
+</div>
 
             </div>
 
@@ -316,39 +403,121 @@ Platform Statistics
 
 </h5>
 
-<p>
+<table class="table table-sm">
 
-<strong>
+<tr>
 
-Registered Users
+<td>
 
-</strong>
+Projects
 
-Coming Soon
+</td>
 
-</p>
+<td>
 
-<p>
+<strong>{{ project_count }}</strong>
 
-<strong>
+</td>
 
-Workflow Completion
+</tr>
 
-</strong>
+<tr>
 
-Coming Soon
+<td>
 
-</p>
+Planning
 
-<p>
+</td>
 
-<strong>
+<td>
 
-Documents Stored
+{{ planning_projects }}
 
-</strong>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Active
+
+</td>
+
+<td>
+
+{{ active_projects }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+On Hold
+
+</td>
+
+<td>
+
+{{ on_hold_projects }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Completed
+
+</td>
+
+<td>
+
+{{ completed_projects }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Archived
+
+</td>
+
+<td>
+
+{{ archived_projects }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Documents
+
+</td>
+
+<td>
 
 {{ document_count }}
+
+</td>
+
+</tr>
+
+</table>
 
 </p>
 
@@ -374,6 +543,8 @@ Coming Soon
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
 <script src="{% static 'js/dashboard.js' %}"></script>
+
 
 {% endblock %}

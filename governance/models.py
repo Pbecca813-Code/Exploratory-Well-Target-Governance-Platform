@@ -418,6 +418,84 @@ class Project(models.Model):
     def __str__(self):
         return self.project_name
     
+# =====================================================
+# PROJECT TEAM
+# =====================================================
+
+class ProjectTeam(models.Model):
+
+    ROLE_CHOICES = [
+
+        ("PROJECT_MANAGER", "Project Manager"),
+
+        ("LEAD_INTERPRETER", "Lead Interpreter"),
+
+        ("REVIEWER", "Reviewer"),
+
+        ("VALIDATOR", "Validator"),
+
+        ("APPROVER", "Approver"),
+
+        ("TEAM_MEMBER", "Team Member"),
+
+    ]
+
+    project = models.ForeignKey(
+
+        Project,
+
+        on_delete=models.CASCADE,
+
+        related_name="team_members"
+
+    )
+
+    employee = models.ForeignKey(
+
+        User,
+
+        on_delete=models.CASCADE,
+
+        related_name="project_assignments"
+
+    )
+
+    role = models.CharField(
+
+        max_length=30,
+
+        choices=ROLE_CHOICES
+
+    )
+
+    assigned_by = models.ForeignKey(
+
+        User,
+
+        on_delete=models.SET_NULL,
+
+        null=True,
+
+        blank=True,
+
+        related_name="assigned_projects"
+
+    )
+
+    assigned_date = models.DateTimeField(
+
+        auto_now_add=True
+
+    )
+
+    class Meta:
+
+        unique_together = ("project", "employee")
+
+    def __str__(self):
+
+        return f"{self.employee} - {self.project}"
+
     # =====================================================
 # PROJECT MEMBER
 # =====================================================

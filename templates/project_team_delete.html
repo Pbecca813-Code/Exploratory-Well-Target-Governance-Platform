@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-lg border-0">
+
+    <div class="card-header bg-danger text-white">
+
+        <h3>
+
+            Remove Team Member
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <p>
+
+            Are you sure you want to remove
+
+            <strong>
+
+                {{ member.employee }}
+
+            </strong>
+
+            from
+
+            <strong>
+
+                {{ member.project }}
+
+            </strong>?
+
+        </p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <a
+                href="{% url 'project_team' member.project.id %}"
+                class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+            <button
+                class="btn btn-danger">
+
+                Remove Member
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

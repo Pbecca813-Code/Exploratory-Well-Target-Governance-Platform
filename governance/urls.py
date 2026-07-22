@@ -18,6 +18,24 @@ urlpatterns = [
     ),
 
     path(
+    "well-targets/<int:pk>/",
+    views.well_target_detail,
+    name="well_target_detail",
+),
+
+path(
+    "well-targets/<int:pk>/edit/",
+    views.well_target_edit,
+    name="well_target_edit",
+),
+
+path(
+    "well-targets/<int:pk>/delete/",
+    views.well_target_delete,
+    name="well_target_delete",
+),
+
+    path(
         'new-target/',
         views.new_target,
         name='new_target'
@@ -159,5 +177,41 @@ path(
     "companies/<int:pk>/delete/",
     views.company_delete,
     name="company_delete",
+),
+
+path(
+    "projects/<int:pk>/",
+    views.project_detail,
+    name="project_detail",
+),
+
+path(
+    "projects/<int:pk>/team/",
+    views.project_team,
+    name="project_team",
+),
+
+path(
+    "projects/<int:pk>/edit/",
+    views.project_edit,
+    name="project_edit",
+),
+
+path(
+    "projects/<int:pk>/delete/",
+    views.project_delete,
+    name="project_delete",
+),
+
+path(
+    "project-team/<int:pk>/edit/",
+    views.project_team_edit,
+    name="project_team_edit",
+),
+
+path(
+    "project-team/<int:pk>/delete/",
+    views.project_team_delete,
+    name="project_team_delete",
 ),
 ]
