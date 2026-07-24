@@ -8,17 +8,98 @@
 
         <div>
 
-            <h2>User Management</h2>
+            <h2 class="fw-bold">
+
+                👥 User Management
+
+            </h2>
 
             <p class="text-muted">
+
                 Manage employees, roles, workspaces and platform access.
+
             </p>
 
         </div>
 
-        <a href="{% url 'create_employee' %}" class="btn btn-danger">
-            + Create Employee
+        <a href="{% url 'create_employee' %}"
+           class="btn btn-danger">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Create Employee
+
         </a>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="row mb-4">
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Employees</h6>
+
+                    <h2>{{ users|length }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6>Administrators</h6>
+
+                    <h2>{{ admin_count }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6>Active Users</h6>
+
+                    <h2>{{ active_count }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6>Inactive Users</h6>
+
+                    <h2>{{ inactive_count }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -26,21 +107,33 @@
 
         <div class="card-body">
 
-            <table class="table table-hover">
+            <div class="d-flex justify-content-between mb-3">
+
+                <input
+
+                    class="form-control"
+
+                    placeholder="Search employees..."
+
+                    style="width:300px;">
+
+            </div>
+
+            <table class="table table-hover align-middle">
 
                 <thead>
 
                     <tr>
 
-                        <th>Photo</th>
+                        <th>First Name</th>
 
-                        <th>Employee</th>
+                        <th>Last Name</th>
 
-                        <th>Workspace</th>
+                        <th>Username</th>
 
-                        <th>Role</th>
+                        <th>Email</th>
 
-                        <th>Department</th>
+                        <th>Administrator</th>
 
                         <th>Status</th>
 
@@ -67,9 +160,21 @@
                         <td>
 
                             {% if user.is_staff %}
-                                ✅
+
+                                <span class="badge bg-primary">
+
+                                    Administrator
+
+                                </span>
+
                             {% else %}
-                                ❌
+
+                                <span class="badge bg-secondary">
+
+                                    User
+
+                                </span>
+
                             {% endif %}
 
                         </td>
@@ -77,10 +182,47 @@
                         <td>
 
                             {% if user.is_active %}
-                                🟢 Active
+
+                                <span class="badge bg-success">
+
+                                    Active
+
+                                </span>
+
                             {% else %}
-                                🔴 Disabled
+
+                                <span class="badge bg-danger">
+
+                                    Inactive
+
+                                </span>
+
                             {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <a href="{% url 'employee_detail' user.id %}"
+                               class="btn btn-sm btn-outline-primary">
+
+                                <i class="bi bi-eye"></i>
+
+                            </a>
+
+                            <a href="{% url 'employee_edit' user.id %}"
+                               class="btn btn-sm btn-outline-success">
+
+                                <i class="bi bi-pencil"></i>
+
+                            </a>
+
+                            <a href="{% url 'employee_delete' user.id %}"
+                               class="btn btn-sm btn-outline-danger">
+
+                                <i class="bi bi-trash"></i>
+
+                            </a>
 
                         </td>
 
@@ -90,9 +232,9 @@
 
                     <tr>
 
-                        <td colspan="6">
+                        <td colspan="7" class="text-center">
 
-                            No users found.
+                            No employees found.
 
                         </td>
 

@@ -28,13 +28,18 @@ from .models import (
 )
 
 from .forms import (
+
     WellTargetForm,
     WellTargetDocumentForm,
     EmployeeCreateForm,
+    EmployeeEditForm,
     AdministratorAccessRequestForm,
     ProjectForm,
     ProjectTeamForm,
     CompanyForm,
+    ReviewForm,
+    ValidationForm,
+
 )
 
 
@@ -398,9 +403,225 @@ def documents(request):
 
 @login_required
 def reviews(request):
+
+    reviews = (
+        SeismicReview.objects
+        .select_related("well_target", "reviewer")
+        .order_by("-review_date")
+    )
+
+    pending_reviews = reviews.filter(
+        status="PENDING"
+    ).count()
+
+    in_progress_reviews = reviews.filter(
+        status="IN_PROGRESS"
+    ).count()
+
+    completed_reviews = reviews.filter(
+        status="COMPLETED"
+    ).count()
+
+    total_reviews = reviews.count()
+
     return render(
         request,
-        'reviews.html'
+        "reviews.html",
+        {
+            "reviews": reviews,
+            "pending_reviews": pending_reviews,
+            "in_progress_reviews": in_progress_reviews,
+            "completed_reviews": completed_reviews,
+            "total_reviews": total_reviews,
+        },
+    )
+
+# =====================================================
+# CREATE REVIEW
+# =====================================================
+
+@login_required
+def review_create(request):
+
+    if request.method == "POST":
+
+        form = ReviewForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Review created successfully."
+            )
+
+            return redirect("reviews")
+
+    else:
+
+        form = ReviewForm()
+
+    return render(
+
+        request,
+
+        "review_form.html",
+
+        {
+
+            "form": form,
+
+            "title": "Create Review",
+
+        },
+
+    )
+
+
+# =====================================================
+# REVIEW DETAIL
+# =====================================================
+
+@login_required
+def review_detail(request, pk):
+
+    review = get_object_or_404(
+
+        SeismicReview,
+
+        pk=pk
+
+    )
+
+    return render(
+
+        request,
+
+        "review_detail.html",
+
+        {
+
+            "review": review,
+
+        },
+
+    )
+
+
+# =====================================================
+# EDIT REVIEW
+# =====================================================
+
+@login_required
+def review_edit(request, pk):
+
+    review = get_object_or_404(
+
+        SeismicReview,
+
+        pk=pk
+
+    )
+
+    if request.method == "POST":
+
+        form = ReviewForm(
+
+            request.POST,
+
+            instance=review
+
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+
+                request,
+
+                "Review updated successfully."
+
+            )
+
+            return redirect(
+
+                "reviews"
+
+            )
+
+    else:
+
+        form = ReviewForm(
+
+            instance=review
+
+        )
+
+    return render(
+
+        request,
+
+        "review_form.html",
+
+        {
+
+            "form": form,
+
+            "title": "Edit Review",
+
+        },
+
+    )
+
+
+# =====================================================
+# DELETE REVIEW
+# =====================================================
+
+@login_required
+def review_delete(request, pk):
+
+    review = get_object_or_404(
+
+        SeismicReview,
+
+        pk=pk
+
+    )
+
+    if request.method == "POST":
+
+        review.delete()
+
+        messages.success(
+
+            request,
+
+            "Review deleted successfully."
+
+        )
+
+        return redirect(
+
+            "reviews"
+
+        )
+
+    return render(
+
+        request,
+
+        "review_delete.html",
+
+        {
+
+            "review": review,
+
+        },
+
     )
 
 @login_required
@@ -520,19 +741,50 @@ def register(request):
         }
     )
 
+# =====================================================
+# USER MANAGEMENT
+# =====================================================
+
 @login_required
 def user_management(request):
 
-    users = User.objects.all().order_by("first_name")
+    users = User.objects.all().order_by(
+        "first_name",
+        "last_name"
+    )
+
+    admin_count = User.objects.filter(
+        is_staff=True
+    ).count()
+
+    active_count = User.objects.filter(
+        is_active=True
+    ).count()
+
+    inactive_count = User.objects.filter(
+        is_active=False
+    ).count()
 
     context = {
+
         "users": users,
+
+        "admin_count": admin_count,
+
+        "active_count": active_count,
+
+        "inactive_count": inactive_count,
+
     }
 
     return render(
+
         request,
+
         "user_management.html",
+
         context,
+
     )
 
 @login_required
@@ -627,6 +879,110 @@ def admin_login(request):
         request,
         "registration/admin_login.html"
     )
+
+# =====================================================
+# EMPLOYEE DETAIL
+# =====================================================
+
+@login_required
+def employee_detail(request, pk):
+
+    employee = get_object_or_404(
+        User,
+        pk=pk
+    )
+
+    return render(
+        request,
+        "employee_detail.html",
+        {
+            "employee": employee,
+        },
+    )
+
+
+# =====================================================
+# EDIT EMPLOYEE
+# =====================================================
+
+@login_required
+def employee_edit(request, pk):
+
+    employee = get_object_or_404(
+        User,
+        pk=pk
+    )
+
+    if request.method == "POST":
+
+        form = EmployeeEditForm(
+            request.POST,
+            instance=employee,
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Employee updated successfully."
+            )
+
+            return redirect(
+                "user_management"
+            )
+
+    else:
+
+        form = EmployeeEditForm(
+            instance=employee
+        )
+
+    return render(
+        request,
+        "employee_form.html",
+        {
+            "form": form,
+            "employee": employee,
+            "title": "Edit Employee",
+        },
+    )
+
+
+# =====================================================
+# DELETE EMPLOYEE
+# =====================================================
+
+@login_required
+def employee_delete(request, pk):
+
+    employee = get_object_or_404(
+        User,
+        pk=pk
+    )
+
+    if request.method == "POST":
+
+        employee.delete()
+
+        messages.success(
+            request,
+            "Employee deleted successfully."
+        )
+
+        return redirect(
+            "user_management"
+        )
+
+    return render(
+        request,
+        "employee_delete.html",
+        {
+            "employee": employee,
+        },
+    )
+
 # =====================================================
 # FORGOT PASSWORD
 # =====================================================
@@ -1147,3 +1503,24 @@ def company_delete(request, pk):
     )
 
     return redirect("company_list")
+
+# =====================================================
+# COMING SOON PAGE
+# =====================================================
+
+@login_required
+def coming_soon(request, title):
+
+    return render(
+
+        request,
+
+        "coming_soon.html",
+
+        {
+
+            "title": title.replace("-", " ").title(),
+
+        },
+
+    )

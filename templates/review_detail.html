@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-info text-white">
+
+        <h3>
+
+            Review Details
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table">
+
+            <tr>
+
+                <th>Well Target</th>
+
+                <td>{{ review.well_target }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Reviewer</th>
+
+                <td>{{ review.reviewer }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Status</th>
+
+                <td>{{ review.get_status_display }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Remarks</th>
+
+                <td>{{ review.remarks }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Date</th>
+
+                <td>{{ review.review_date }}</td>
+
+            </tr>
+
+        </table>
+
+        <a href="{% url 'reviews' %}"
+           class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

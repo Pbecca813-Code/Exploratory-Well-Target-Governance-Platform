@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -148,36 +152,25 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# ===================================================
-# EMAIL CONFIGURATION
-# ===================================================
-
-import os
+# =====================================================
+# EMAIL CONFIGURATION (BREVO)
+# =====================================================
 
 EMAIL_BACKEND = os.getenv(
     "EMAIL_BACKEND",
     "django.core.mail.backends.smtp.EmailBackend"
 )
 
-EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
 
-EMAIL_PORT = int(os.getenv("EMAIL_PORT", "465"))
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
 
-EMAIL_USE_TLS = False
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True") == "True"
 
-EMAIL_USE_SSL = True
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "False") == "True"
 
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
-DEFAULT_FROM_EMAIL = os.getenv(
-    "DEFAULT_FROM_EMAIL",
-    "WellTarget Governance <exploratory.welltarget@gmail.com>"
-)
-
-print("EMAIL_BACKEND =", EMAIL_BACKEND)
-print("EMAIL_HOST =", EMAIL_HOST)
-print("EMAIL_PORT =", EMAIL_PORT)
-print("EMAIL_USE_SSL =", EMAIL_USE_SSL)
-print("EMAIL_HOST_USER =", EMAIL_HOST_USER)
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")

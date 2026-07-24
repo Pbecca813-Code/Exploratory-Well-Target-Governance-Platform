@@ -30,7 +30,7 @@ Manage geological interpretation reviews and monitor review progress.
 
                 <h2 class="text-warning">
 
-                    5
+                    {{ pending_reviews }}
 
                 </h2>
 
@@ -54,7 +54,7 @@ Manage geological interpretation reviews and monitor review progress.
 
                 <h2 class="text-success">
 
-                    12
+                    {{ completed_reviews   }}
 
                 </h2>
 
@@ -72,13 +72,13 @@ Manage geological interpretation reviews and monitor review progress.
 
                 <h6 class="text-muted">
 
-                    Average Time
+                    In Progress
 
                 </h6>
 
                 <h2>
 
-                    2.3 d
+                    {{ in_progress_reviews }}
 
                 </h2>
 
@@ -96,13 +96,13 @@ Manage geological interpretation reviews and monitor review progress.
 
                 <h6 class="text-muted">
 
-                    Review Score
+                    Total Reviews
 
                 </h6>
 
                 <h2 class="text-primary">
 
-                    96%
+                    {{ total_reviews }}
 
                 </h2>
 
@@ -128,13 +128,14 @@ placeholder="Search reviews..."
 
 style="width:300px;">
 
-<button class="btn btn-primary">
+<a href="{% url 'review_create' %}"
+   class="btn btn-primary">
 
-<i class="bi bi-plus-circle"></i>
+    <i class="bi bi-plus-circle"></i>
 
-New Review
+    New Review
 
-</button>
+</a>
 
 </div>
 
@@ -160,77 +161,89 @@ New Review
 
 <tbody>
 
+{% for review in reviews %}
+
 <tr>
 
-<td>Alpha-01</td>
+    <td>
+        {{ review.well_target.target_name }}
+    </td>
 
-<td>Patricia</td>
+    <td>
+        {{ review.reviewer.get_full_name|default:review.reviewer.username }}
+    </td>
 
-<td>
+    <td>
 
-<span class="badge bg-warning">
+        {% if review.status == "PENDING" %}
 
-Pending
+            <span class="badge bg-warning text-dark">
+                Pending
+            </span>
 
-</span>
+        {% elif review.status == "IN_PROGRESS" %}
 
-</td>
+            <span class="badge bg-primary">
+                In Progress
+            </span>
 
-<td>09 Jul 2026</td>
+        {% elif review.status == "COMPLETED" %}
 
-<td>
+            <span class="badge bg-success">
+                Completed
+            </span>
 
-<button class="btn btn-sm btn-outline-primary">
+        {% endif %}
 
-<i class="bi bi-eye"></i>
+    </td>
 
-</button>
+    <td>
+        {{ review.review_date|date:"d M Y" }}
+    </td>
 
-<button class="btn btn-sm btn-outline-success">
+    <td>
 
-<i class="bi bi-check2"></i>
+    <a
+        href="{% url 'review_detail' review.id %}"
+        class="btn btn-sm btn-outline-primary">
 
-</button>
+        <i class="bi bi-eye"></i>
+
+    </a>
+
+    <a
+        href="{% url 'review_edit' review.id %}"
+        class="btn btn-sm btn-outline-success">
+
+        <i class="bi bi-pencil"></i>
+
+    </a>
+
+    <a
+        href="{% url 'review_delete' review.id %}"
+        class="btn btn-sm btn-outline-danger">
+
+        <i class="bi bi-trash"></i>
+
+    </a>
 
 </td>
 
 </tr>
 
+{% empty %}
+
 <tr>
 
-<td>Beta-02</td>
+    <td colspan="5" class="text-center">
 
-<td>Carlos</td>
+        No Reviews Available.
 
-<td>
-
-<span class="badge bg-success">
-
-Completed
-
-</span>
-
-</td>
-
-<td>08 Jul 2026</td>
-
-<td>
-
-<button class="btn btn-sm btn-outline-primary">
-
-<i class="bi bi-eye"></i>
-
-</button>
-
-<button class="btn btn-sm btn-outline-secondary">
-
-<i class="bi bi-file-earmark-pdf"></i>
-
-</button>
-
-</td>
+    </td>
 
 </tr>
+
+{% endfor %}
 
 </tbody>
 

@@ -67,8 +67,13 @@ class WellTargetDocument(models.Model):
 class SeismicReview(models.Model):
 
     REVIEW_STATUS = [
-        ('APPROVED', 'Approved'),
-        ('REJECTED', 'Rejected')
+
+        ("PENDING", "Pending"),
+
+        ("IN_PROGRESS", "In Progress"),
+
+        ("COMPLETED", "Completed"),
+
     ]
 
     well_target = models.ForeignKey(
@@ -82,8 +87,13 @@ class SeismicReview(models.Model):
     )
 
     status = models.CharField(
+
         max_length=20,
-        choices=REVIEW_STATUS
+
+        choices=REVIEW_STATUS,
+
+        default="PENDING"
+
     )
 
     review_date = models.DateTimeField(
@@ -93,12 +103,18 @@ class SeismicReview(models.Model):
     remarks = models.TextField()
 
     def __str__(self):
-        return f"Review - {self.well_target}"    
+        return f"Review - {self.well_target}"   
+     
 class Validation(models.Model):
 
     VALIDATION_STATUS = [
-        ('VALID', 'Valid'),
-        ('INVALID', 'Invalid')
+
+        ("PENDING", "Pending"),
+
+        ("IN_PROGRESS", "In Progress"),
+
+        ("COMPLETED", "Completed"),
+
     ]
 
     well_target = models.ForeignKey(
@@ -124,6 +140,7 @@ class Validation(models.Model):
 
     def __str__(self):
         return f"Validation - {self.well_target}"
+    
 class TargetApproval(models.Model):
 
     APPROVAL_STATUS = [

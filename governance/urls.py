@@ -77,6 +77,34 @@ path(
         name='reviews'
     ),
 
+    # =====================================================
+# REVIEW CRUD
+# =====================================================
+
+path(
+    "reviews/new/",
+    views.review_create,
+    name="review_create",
+),
+
+path(
+    "reviews/<int:pk>/",
+    views.review_detail,
+    name="review_detail",
+),
+
+path(
+    "reviews/<int:pk>/edit/",
+    views.review_edit,
+    name="review_edit",
+),
+
+path(
+    "reviews/<int:pk>/delete/",
+    views.review_delete,
+    name="review_delete",
+),
+
     path(
         'validation/',
         views.validation,
@@ -118,6 +146,28 @@ path(
         views.create_employee,
         name='create_employee'
     ),
+
+    # =====================================================
+# EMPLOYEE CRUD
+# =====================================================
+
+path(
+    "employees/<int:pk>/",
+    views.employee_detail,
+    name="employee_detail",
+),
+
+path(
+    "employees/<int:pk>/edit/",
+    views.employee_edit,
+    name="employee_edit",
+),
+
+path(
+    "employees/<int:pk>/delete/",
+    views.employee_delete,
+    name="employee_delete",
+),
 
     path(
         "user-login/",
@@ -213,5 +263,11 @@ path(
     "project-team/<int:pk>/delete/",
     views.project_team_delete,
     name="project_team_delete",
+),
+
+path(
+    "coming-soon/<str:title>/",
+    views.coming_soon,
+    name="coming_soon",
 ),
 ]

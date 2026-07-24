@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-body text-center p-5">
+
+        <i class="bi bi-tools display-1 text-primary"></i>
+
+        <h2 class="mt-4">
+
+            {{ title }}
+
+        </h2>
+
+        <p class="lead text-muted">
+
+            This module is currently under development.
+
+        </p>
+
+        <hr>
+
+        <p>
+
+            The database architecture has already been designed and this module
+            will be completed during the next development sprint.
+
+        </p>
+
+        <div class="row mt-4">
+
+            <div class="col-md-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        ✅ Model
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        🚧 CRUD
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        🚧 Reports
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        🚧 Dashboard
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <a href="{% url 'home' %}" class="btn btn-primary mt-4">
+
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
