@@ -86,14 +86,115 @@ class RegisterUserForm(forms.ModelForm):
 
         return password
     
+# =====================================================
+# EMPLOYEE CREATE FORM
+# =====================================================
+
 class EmployeeCreateForm(forms.ModelForm):
 
+    # -----------------------------
+    # USER FIELDS
+    # -----------------------------
+
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"class": "form-control"})
+    )
+
     password = forms.CharField(
-        widget=forms.PasswordInput()
+        widget=forms.PasswordInput(attrs={"class": "form-control"})
     )
 
     confirm_password = forms.CharField(
-        widget=forms.PasswordInput()
+        widget=forms.PasswordInput(attrs={"class": "form-control"})
+    )
+
+    # -----------------------------
+    # EMPLOYEE PROFILE
+    # -----------------------------
+
+    employee_number = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    profile_photo = forms.ImageField(
+        required=False
+    )
+
+    mobile_number = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    office_location = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    workspace = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    company = forms.ModelChoiceField(
+        queryset=Company.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-select"})
+    )
+
+    business_unit = forms.ModelChoiceField(
+        queryset=BusinessUnit.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-select"})
+    )
+
+    department = forms.ModelChoiceField(
+        queryset=Department.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-select"})
+    )
+
+    country = forms.ModelChoiceField(
+        queryset=Country.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-select"})
+    )
+
+    region = forms.ModelChoiceField(
+        queryset=Region.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-select"})
+    )
+
+    basin = forms.ModelChoiceField(
+        queryset=Basin.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-select"})
+    )
+
+    job_title = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    role = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    mfa_enabled = forms.BooleanField(
+        required=False
     )
 
     class Meta:
@@ -101,15 +202,10 @@ class EmployeeCreateForm(forms.ModelForm):
         model = User
 
         fields = [
-
             "first_name",
-
             "last_name",
-
             "username",
-
             "email",
-
         ]
 
     def clean(self):
@@ -117,7 +213,6 @@ class EmployeeCreateForm(forms.ModelForm):
         cleaned_data = super().clean()
 
         password = cleaned_data.get("password")
-
         confirm = cleaned_data.get("confirm_password")
 
         if password != confirm:
@@ -125,6 +220,8 @@ class EmployeeCreateForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Passwords do not match."
             )
+
+        validate_password(password)
 
         return cleaned_data
     
@@ -457,7 +554,7 @@ class ValidationForm(forms.ModelForm):
 
         }
 
-        # =====================================================
+# =====================================================
 # EMPLOYEE EDIT FORM
 # =====================================================
 
@@ -468,45 +565,28 @@ class EmployeeEditForm(forms.ModelForm):
         model = User
 
         fields = [
-
             "first_name",
-
             "last_name",
-
             "username",
-
             "email",
-
-            "is_staff",
-
-            "is_active",
-
         ]
 
         widgets = {
 
             "first_name": forms.TextInput(attrs={
-                "class": "form-control"
+                "class": "form-control",
             }),
 
             "last_name": forms.TextInput(attrs={
-                "class": "form-control"
+                "class": "form-control",
             }),
 
             "username": forms.TextInput(attrs={
-                "class": "form-control"
+                "class": "form-control",
             }),
 
             "email": forms.EmailInput(attrs={
-                "class": "form-control"
-            }),
-
-            "is_staff": forms.CheckboxInput(attrs={
-                "class": "form-check-input"
-            }),
-
-            "is_active": forms.CheckboxInput(attrs={
-                "class": "form-check-input"
+                "class": "form-control",
             }),
 
         }

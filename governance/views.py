@@ -22,6 +22,7 @@ from .models import (
     Project,
     ProjectTeam,
     Company,
+    EmployeeProfile,
     SeismicReview,
     Validation,
     TargetApproval,

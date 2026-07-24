@@ -195,56 +195,8 @@ class WellTargetHistory(models.Model):
 
     def __str__(self):
         return self.action
-class EmployeeProfile(models.Model):
-
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE
-    )
-
-    phone_number = models.CharField(
-        max_length=30,
-        blank=True
-    )
-
-    address = models.TextField(
-        blank=True
-    )
-
-    department = models.CharField(
-        max_length=100,
-        blank=True
-    )
-
-    role = models.CharField(
-        max_length=100,
-        blank=True
-    )
-
-    profile_photo = models.ImageField(
-        upload_to="profiles/",
-        blank=True,
-        null=True
-    )
-
-    id_document = models.FileField(
-        upload_to="employee_ids/",
-        blank=True,
-        null=True
-    )
-
-    is_active_employee = models.BooleanField(
-        default=True
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-
-    def __str__(self):
-        return self.user.username
     
-    # =====================================================
+# =====================================================
 # ADMINISTRATOR ACCESS REQUEST
 # =====================================================
 
@@ -674,3 +626,120 @@ class Basin(models.Model):
 
     def __str__(self):
         return self.name
+
+# =====================================================
+# EMPLOYEE PROFILE
+# =====================================================
+
+class EmployeeProfile(models.Model):
+
+    STATUS_CHOICES = [
+        ("ACTIVE", "Active"),
+        ("INACTIVE", "Inactive"),
+        ("ON_LEAVE", "On Leave"),
+    ]
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="profile"
+    )
+
+    employee_number = models.CharField(
+        max_length=20,
+        unique=True
+    )
+
+    profile_photo = models.ImageField(
+        upload_to="employees/",
+        blank=True,
+        null=True
+    )
+
+    mobile_number = models.CharField(
+        max_length=30,
+        blank=True
+    )
+
+    office_location = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    workspace = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    business_unit = models.ForeignKey(
+        BusinessUnit,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    country = models.ForeignKey(
+        Country,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    region = models.ForeignKey(
+        Region,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    basin = models.ForeignKey(
+        Basin,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    job_title = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    role = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="ACTIVE"
+    )
+
+    mfa_enabled = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    def __str__(self):
+        return f"{self.employee_number} - {self.user.get_full_name()}"

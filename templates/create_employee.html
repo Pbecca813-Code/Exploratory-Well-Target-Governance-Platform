@@ -1,47 +1,739 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
-<div class="container">
+<link rel="stylesheet" href="{% static 'css/employee.css' %}">
 
-    <div class="card shadow-sm">
+<div class="container-fluid py-4">
 
-        <div class="card-header">
+    <form method="POST"
+          enctype="multipart/form-data"
+          class="employee-form">
 
-            <h3>Create Employee</h3>
+        {% csrf_token %}
+
+        <div class="row">
+
+            <!-- ===================================================== -->
+            <!-- LEFT SIDEBAR -->
+            <!-- ===================================================== -->
+
+            <div class="col-lg-3">
+
+                <div class="card shadow-sm border-0">
+
+                    <div class="card-header bg-danger text-white">
+
+                        <h5 class="mb-0">
+
+                            Employee Profile
+
+                        </h5>
+
+                    </div>
+
+                    <div class="card-body text-center">
+
+                        <img
+                            id="photoPreview"
+                            src="https://via.placeholder.com/220x220.png?text=Employee"
+                            class="img-fluid rounded-circle shadow mb-3"
+                            style="width:220px;height:220px;object-fit:cover;"
+                        >
+
+                        <div class="mb-3">
+
+                            {{ form.profile_photo }}
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-danger btn-sm w-100"
+                            onclick="document.getElementById('id_profile_photo').click();">
+
+                            Change Profile Photo
+
+                        </button>
+
+                        <hr>
+
+                        <div class="mt-3">
+
+                            <h6>
+
+                                Employee Status
+
+                            </h6>
+
+                            {{ form.status }}
+
+                        </div>
+
+                        <div class="form-check form-switch mt-4 text-start">
+
+                            {{ form.mfa_enabled }}
+
+                            <label class="form-check-label">
+
+                                Enable MFA
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- MAIN CONTENT -->
+            <!-- ===================================================== -->
+
+            <div class="col-lg-9">
+
+                <!-- ================================================= -->
+                <!-- PERSONAL INFORMATION -->
+                <!-- ================================================= -->
+
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-light">
+
+                        <h4 class="mb-0">
+
+                            Personal Information
+
+                        </h4>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    First Name
+
+                                </label>
+
+                                {{ form.first_name }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Last Name
+
+                                </label>
+
+                                {{ form.last_name }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Username
+
+                                </label>
+
+                                {{ form.username }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Company Email
+
+                                </label>
+
+                                {{ form.email }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Password
+
+                                </label>
+
+                                {{ form.password }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Confirm Password
+
+                                </label>
+
+                                {{ form.confirm_password }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Mobile Number
+
+                                </label>
+
+                                {{ form.mobile_number }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Employee Number
+
+                                </label>
+
+                                {{ form.employee_number }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ================================================= -->
+                <!-- ORGANIZATION INFORMATION -->
+                <!-- ================================================= -->
+
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-light">
+
+                        <h4 class="mb-0">
+
+                            Organization Information
+
+                        </h4>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Company
+
+                                </label>
+
+                                {{ form.company }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Business Unit
+
+                                </label>
+
+                                {{ form.business_unit }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Department
+
+                                </label>
+
+                                {{ form.department }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Country
+
+                                </label>
+
+                                {{ form.country }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Region
+
+                                </label>
+
+                                {{ form.region }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Basin
+
+                                </label>
+
+                                {{ form.basin }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Workspace
+
+                                </label>
+
+                                {{ form.workspace }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Office Location
+
+                                </label>
+
+                                {{ form.office_location }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                                <!-- ================================================= -->
+                <!-- EMPLOYMENT INFORMATION -->
+                <!-- ================================================= -->
+
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-light">
+
+                        <h4 class="mb-0">
+
+                            Employment Information
+
+                        </h4>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Job Title
+
+                                </label>
+
+                                {{ form.job_title }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Platform Role
+
+                                </label>
+
+                                {{ form.role }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ================================================= -->
+                <!-- PLATFORM SECURITY -->
+                <!-- ================================================= -->
+
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-light">
+
+                        <h4 class="mb-0">
+
+                            Platform Security
+
+                        </h4>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="alert alert-success">
+
+                                    <h6>
+
+                                        Authentication
+
+                                    </h6>
+
+                                    <p class="mb-1">
+
+                                        ✔ Username & Password
+
+                                    </p>
+
+                                    <p class="mb-1">
+
+                                        ✔ MFA Supported
+
+                                    </p>
+
+                                    <p class="mb-0">
+
+                                        ✔ Password Policy Enabled
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="alert alert-warning">
+
+                                    <h6>
+
+                                        Account Security
+
+                                    </h6>
+
+                                    <p class="mb-1">
+
+                                        Password expires every 60 days.
+
+                                    </p>
+
+                                    <p class="mb-1">
+
+                                        Login attempts are logged.
+
+                                    </p>
+
+                                    <p class="mb-0">
+
+                                        Audit trail is enabled.
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ================================================= -->
+                <!-- PROJECT ASSIGNMENT -->
+                <!-- ================================================= -->
+
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-light">
+
+                        <h4 class="mb-0">
+
+                            Project Assignment
+
+                        </h4>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="alert alert-info">
+
+                            <strong>Version 1.0</strong>
+
+                            <hr>
+
+                            After an employee has been created,
+                            the administrator can assign the employee
+                            to one or more projects using the
+                            Project Management module.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ================================================= -->
+                <!-- ACCOUNT SUMMARY -->
+                <!-- ================================================= -->
+
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-light">
+
+                        <h4 class="mb-0">
+
+                            Account Summary
+
+                        </h4>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item">
+
+                                        ✔ Employee Profile
+
+                                    </li>
+
+                                    <li class="list-group-item">
+
+                                        ✔ User Account
+
+                                    </li>
+
+                                    <li class="list-group-item">
+
+                                        ✔ Organization Assignment
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <ul class="list-group">
+
+                                    <li class="list-group-item">
+
+                                        ✔ Platform Role
+
+                                    </li>
+
+                                    <li class="list-group-item">
+
+                                        ✔ Security Settings
+
+                                    </li>
+
+                                    <li class="list-group-item">
+
+                                        ✔ Audit Trail Ready
+
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ================================================= -->
+                <!-- ACTION BUTTONS -->
+                <!-- ================================================= -->
+
+                <div class="card shadow-sm border-0">
+
+                    <div class="card-body text-end">
+
+                        <a
+                            href="{% url 'user_management' %}"
+                            class="btn btn-secondary btn-lg">
+
+                            Cancel
+
+                        </a>
+
+                        <button
+                            type="reset"
+                            class="btn btn-warning btn-lg">
+
+                            Reset Form
+
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger btn-lg">
+
+                            <i class="bi bi-person-plus-fill"></i>
+
+                            Create Employee
+
+                        </button>
+
+                    </div>
+
+                </div>
+                                <!-- ================================================= -->
+                <!-- PLATFORM INFORMATION -->
+                <!-- ================================================= -->
+
+                <div class="card shadow-sm border-0 mt-4">
+
+                    <div class="card-header bg-dark text-white">
+
+                        <h5 class="mb-0">
+
+                            WellTarget Governance Platform
+
+                        </h5>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row text-center">
+
+                            <div class="col-md-3">
+
+                                <h3 class="text-danger">
+
+                                    <i class="bi bi-person-badge-fill"></i>
+
+                                </h3>
+
+                                <strong>User Account</strong>
+
+                                <p class="text-muted">
+
+                                    Secure authentication using the Django User model.
+
+                                </p>
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <h3 class="text-danger">
+
+                                    <i class="bi bi-shield-lock-fill"></i>
+
+                                </h3>
+
+                                <strong>Security</strong>
+
+                                <p class="text-muted">
+
+                                    Password policy, audit trail and MFA ready.
+
+                                </p>
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <h3 class="text-danger">
+
+                                    <i class="bi bi-diagram-3-fill"></i>
+
+                                </h3>
+
+                                <strong>Projects</strong>
+
+                                <p class="text-muted">
+
+                                    Employees can later be assigned to one or more projects.
+
+                                </p>
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <h3 class="text-danger">
+
+                                    <i class="bi bi-file-earmark-check-fill"></i>
+
+                                </h3>
+
+                                <strong>Governance</strong>
+
+                                <p class="text-muted">
+
+                                    Full auditability and workflow governance support.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <div class="card-body">
-
-            <form method="post">
-
-                {% csrf_token %}
-
-                {{ form.as_p }}
-
-                <button
-                    type="submit"
-                    class="btn btn-danger">
-
-                    Create Employee
-
-                </button>
-
-                <a
-                    href="{% url 'user_management' %}"
-                    class="btn btn-secondary">
-
-                    Cancel
-
-                </a>
-
-            </form>
-
-        </div>
-
-    </div>
+    </form>
 
 </div>
+
+<script src="{% static 'js/employee.js' %}"></script>
 
 {% endblock %}

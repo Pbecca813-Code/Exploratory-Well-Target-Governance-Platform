@@ -649,3 +649,183 @@ table{
     background:#B02117;
 
 }
+
+.active-menu{
+    background:#d52b1e;
+    color:#fff !important;
+    border-left:5px solid #ffffff;
+    font-weight:600;
+}
+
+.active-menu i{
+    color:#fff;
+}
+
+.sidebar-menu a:hover{
+    background:#d52b1e;
+    color:white !important;
+    transform:translateX(4px);
+    transition:.25s;
+}
+
+/* =====================================================
+   ACTIVE SIDEBAR MENU
+===================================================== */
+
+.active-menu{
+
+    background:#d52b1e !important;
+
+    color:#ffffff !important;
+
+    border-left:5px solid #ffffff;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.active-menu i{
+
+    color:#ffffff !important;
+
+}
+
+.sidebar-menu a{
+
+    transition:.25s;
+
+    border-left:5px solid transparent;
+
+}
+
+.sidebar-menu a:hover{
+
+    background:#d52b1e;
+
+    color:#ffffff !important;
+
+    border-left:5px solid #ffffff;
+
+    transform:translateX(4px);
+
+}
+
+.sidebar-home{
+
+    transition:.25s;
+
+}
+
+.sidebar-home:hover{
+
+    background:#d52b1e;
+
+    color:white !important;
+
+}
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-photo{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #d52b1e;
+
+    transition:.25s;
+
+}
+
+.profile-photo:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* =====================================================
+   DROPDOWN
+===================================================== */
+
+.dropdown-menu{
+
+    border:none;
+
+    border-radius:12px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+
+}
+
+.dropdown-item{
+
+    transition:.20s;
+
+}
+
+.dropdown-item:hover{
+
+    background:#d52b1e;
+
+    color:white;
+
+}
+
+.dropdown-item:hover i{
+
+    color:white;
+
+}
+
+/* =====================================================
+   DASHBOARD CARDS
+===================================================== */
+
+.dashboard-card{
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+
+    border-color:#d52b1e;
+
+}
+
+/* =====================================================
+   ONLINE STATUS
+===================================================== */
+
+.online-dot{
+
+    width:10px;
+
+    height:10px;
+
+    background:#19c37d;
+
+    border-radius:50%;
+
+    display:inline-block;
+
+    margin-left:8px;
+
+    box-shadow:0 0 8px #19c37d;
+
+}
